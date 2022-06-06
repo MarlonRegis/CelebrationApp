@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="CelebrationApp.Views.RegistrationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CelebrationApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:CelebrationApp.ViewModels"
+    mc:Ignorable="d"
+    Width="780"
+    Height="700"    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Width" Value="600"/>
+
+        </Style>
+        <Style TargetType="TextBlock"  x:Key="Label">
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Button" >
+            <Setter Property="Margin" Value="10,0,0,10"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid Background="LightCoral">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,50,0" >
+            <TextBlock Text="Registration note screen" FontSize="40" Margin="0,10,0,20"/>
+            <TextBlock Text="Name:" Style="{StaticResource Label}"/>
+            <TextBox Text="{x:Bind ViewModel.Name}"/>
+            <TextBlock Text="Celebration Date:" Style="{StaticResource Label}"/>
+            <!--<CalendarDatePicker PlaceholderText="Pick a date" Header="Calendar"                             
+                                Date="{x:Bind ViewModel.CelebrationDate, Mode=TwoWay}"
+                                DateFormat="{}{day.integer} {month.full} {year.full}"/>-->
+            <DatePicker Header="Pick a date" SelectedDate="{x:Bind ViewModel.CelebrationDate}"/>
+            <TextBlock Text="Description:" Style="{StaticResource Label}"/>
+            <TextBox Text="{x:Bind ViewModel.Description, Mode=TwoWay}" TextWrapping="Wrap" Height="200"/>
+            <TextBlock Text="Record Date:" Style="{StaticResource Label}"/>
+            <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=TwoWay}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Save" Click="Save_Click"/>
+            <Button Content="Clean" Click="Clean_Click"/>
+            <Button Content="Remove" Click="Remove_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>
