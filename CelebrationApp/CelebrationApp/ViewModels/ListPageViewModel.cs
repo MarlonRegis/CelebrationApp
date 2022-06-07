@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,10 @@ using Windows.ApplicationModel.Core;
 
 namespace CelebrationApp.ViewModels
 {
-    public class ListPageViewModel
+    public class ListPageViewModel : ObservableObject
     {
+
+
 
         public void Close()
         {

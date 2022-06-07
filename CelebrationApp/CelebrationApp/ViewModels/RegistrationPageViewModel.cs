@@ -31,11 +31,11 @@ namespace CelebrationApp.ViewModels
             set => SetProperty(ref recordDate, value);
         }
 
-        private DateTime celebrationDateame = DateTime.Now;
-        public DateTime CelebrationDate
+        private DateTimeOffset celebrationDate = DateTimeOffset.Now;
+        public DateTimeOffset CelebrationDate
         {
-            get { return celebrationDateame; }
-            set => SetProperty(ref celebrationDateame, value);
+            get { return celebrationDate; }
+            set => SetProperty(ref celebrationDate, value);
         }
 
 
@@ -48,7 +48,7 @@ namespace CelebrationApp.ViewModels
             Name = null;
             Description = null;
             RecordDate = DateTime.Now;
-            CelebrationDate= DateTime.Now;
+            CelebrationDate= DateTimeOffset.Now;
         }
         public void Remove()
         {
