@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
+using Repository.DbContexts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,8 +41,14 @@ namespace CelebrationApp
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            using (var db = new CelebrationDbContext())
+            {
+                await db.Database.EnsureCreatedAsync();
+            }
+
+
             m_window = new MainWindow();
             m_window.Activate();
         }
