@@ -8,6 +8,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelebrationApp", "CelebrationApp\CelebrationApp\CelebrationApp.csproj", "{112CB4DB-5981-494B-AA0B-BF9E7B09510C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelebrationRepository", "Repository\CelebrationRepository.csproj", "{1B2BBD29-AEF6-495C-8F1B-608B8E8674FB}"
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
