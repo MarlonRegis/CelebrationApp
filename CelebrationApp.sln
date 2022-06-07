@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "CelebrationApp (Package)", "CelebrationApp\CelebrationApp (Package)\CelebrationApp (Package).wapproj", "{198C4683-B281-44A4-928E-D4BE55D1DC3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelebrationApp", "CelebrationApp\CelebrationApp\CelebrationApp.csproj", "{112CB4DB-5981-494B-AA0B-BF9E7B09510C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelebrationApp", "CelebrationApp\CelebrationApp\CelebrationApp.csproj", "{112CB4DB-5981-494B-AA0B-BF9E7B09510C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{1B2BBD29-AEF6-495C-8F1B-608B8E8674FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelebrationRepository", "Repository\CelebrationRepository.csproj", "{1B2BBD29-AEF6-495C-8F1B-608B8E8674FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
