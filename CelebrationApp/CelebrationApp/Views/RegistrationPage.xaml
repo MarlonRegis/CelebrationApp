@@ -6,7 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CelebrationApp.ViewModels"
-    mc:Ignorable="d"          
+    mc:Ignorable="d"
+    Width="780"
+    Height="700"    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
@@ -40,19 +42,18 @@
             <TextBlock Text="Celebration Date:" Style="{StaticResource Label}"/>
             <!--<CalendarDatePicker PlaceholderText="Pick a date" Header="Calendar"                             
                                 Date="{x:Bind ViewModel.CelebrationDate, Mode=TwoWay}"
-                                DateFormat="{}{day.integer}/{month.integer}/{year.Full}"/>-->
-            <DatePicker Header="Pick a date" SelectedDate="{x:Bind ViewModel.CelebrationDate}" />
+                                DateFormat="{}{day.integer} {month.full} {year.full}"/>-->
+            <DatePicker Header="Pick a date" SelectedDate="{x:Bind ViewModel.CelebrationDate}"/>
             <TextBlock Text="Description:" Style="{StaticResource Label}"/>
             <TextBox Text="{x:Bind ViewModel.Description, Mode=OneWay}" TextWrapping="Wrap" Height="200"/>
             <TextBlock Text="Record Date:" Style="{StaticResource Label}"/>
-            <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=OneWay}" />
-            
-            <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Content="Save" Click="Save_Click"/>
-                <Button Content="Clean" Click="Clean_Click"/>
-                <Button Content="Remove" Click="Remove_Click"/>
-            </StackPanel>
+            <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=TwoWay}" />
         </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Save" Click="Save_Click"/>
+            <Button Content="Clean" Click="Clean_Click"/>
+            <Button Content="Remove" Click="Remove_Click"/>
 
     </Grid>
 </Page>

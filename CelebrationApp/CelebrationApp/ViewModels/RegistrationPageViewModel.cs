@@ -9,6 +9,12 @@ namespace CelebrationApp.ViewModels
 {
     public class RegistrationPageViewModel : ObservableObject
     {
+        public RegistrationPageViewModel()
+        {
+            celebrationDateame = DateTime.Now;
+            recordDate = DateTime.Now;
+
+        }
         
         private string name;
         public string Name
@@ -24,15 +30,15 @@ namespace CelebrationApp.ViewModels
             set => SetProperty(ref description, value);
         }
 
-        private DateTime recordDate = DateTime.Now;
+        private DateTime recordDate;
         public DateTime RecordDate
         {
             get { return recordDate; }
             set => SetProperty(ref recordDate, value);
         }
 
-        private DateTimeOffset celebrationDate = DateTimeOffset.Now;
-        public DateTimeOffset CelebrationDate
+        private DateTime celebrationDateame = DateTime.Now;
+        public DateTime CelebrationDate
         {
             get { return celebrationDate; }
             set => SetProperty(ref celebrationDate, value);
