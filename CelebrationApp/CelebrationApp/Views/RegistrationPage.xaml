@@ -6,9 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CelebrationApp.ViewModels"
-    mc:Ignorable="d"
-    Width="780"
-    Height="700"    
+    mc:Ignorable="d" 
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
@@ -28,32 +26,29 @@
 
     </Page.Resources>
 
-    <Grid Background="LightCoral">
-        <!--<Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>-->
-
-
-        <StackPanel  HorizontalAlignment="Center" Margin="0,0,50,0" >
+    <Grid Background="LightGray">
+      
+        <StackPanel  HorizontalAlignment="Center" Margin="0,0,50,0" VerticalAlignment="Stretch">
             <TextBlock Text="Registration note screen" FontSize="40" Margin="0,10,0,20"/>
             <TextBlock Text="Name:" Style="{StaticResource Label}"/>
             <TextBox Text="{x:Bind ViewModel.Name, Mode=OneWay}"/>
+            <DatePicker Header="Pick a Celebration Date:" 
+                        SelectedDateChanged="{x:Bind ViewModel.DateChanged}" 
+                        MinYear="{x:Bind ViewModel.datePicker.MinYear}"
+                        MaxYear="{x:Bind ViewModel.datePicker.MaxYear}"/>
             <TextBlock Text="Celebration Date:" Style="{StaticResource Label}"/>
-            <!--<CalendarDatePicker PlaceholderText="Pick a date" Header="Calendar"                             
-                                Date="{x:Bind ViewModel.CelebrationDate, Mode=TwoWay}"
-                                DateFormat="{}{day.integer} {month.full} {year.full}"/>-->
-            <DatePicker Header="Pick a date" SelectedDate="{x:Bind ViewModel.CelebrationDate}"/>
+            <TextBlock Text="{x:Bind ViewModel.TextDate, Mode=OneWay}"/>
             <TextBlock Text="Description:" Style="{StaticResource Label}"/>
             <TextBox Text="{x:Bind ViewModel.Description, Mode=OneWay}" TextWrapping="Wrap" Height="200"/>
             <TextBlock Text="Record Date:" Style="{StaticResource Label}"/>
-            <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=TwoWay}" />
-        </StackPanel>
+            <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=OneWay}" />
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Save" Click="Save_Click"/>
-            <Button Content="Clean" Click="Clean_Click"/>
-            <Button Content="Remove" Click="Remove_Click"/>
+            <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Stretch">
+                <Button Content="Save" Click="{x:Bind ViewModel.Save}"/>
+                <Button Content="Clean" Click="{x:Bind ViewModel.Clean}"/>
+                <Button Content="Remove" Click="{x:Bind ViewModel.Remove}"/>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Page>

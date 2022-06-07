@@ -7,8 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:viewmodels="using:CelebrationApp.ViewModels"
-    Width="670"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-   
+    <Grid Background="LightGray">
+        <StackPanel>
+            <TextBlock Text="List Celebrations" FontSize="40" Margin="0,10,0,20" HorizontalAlignment="Center"/>
+            <Grid Width="500" Height="500" Background="Black"/>
+            <Button Content="Close" Click="{x:Bind ViewModel.Close}" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+
 </Page>
