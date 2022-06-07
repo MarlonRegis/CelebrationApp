@@ -7,5 +7,5 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:views="using:CelebrationApp.Views"
     mc:Ignorable="d">
 
-    <views:RegistrationPage />
-</Window>
+    <views:ExampleViewPage />
+</Window>   

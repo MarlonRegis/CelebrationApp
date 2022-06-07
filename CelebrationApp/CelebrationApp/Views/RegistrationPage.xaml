@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:CelebrationApp.ViewModels"
     mc:Ignorable="d"
-    Width="780"
-    Height="700"    
+    Width="500"
+    Height="600"    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
@@ -41,14 +41,13 @@
             <TextBlock Text="Name:" Style="{StaticResource Label}"/>
             <TextBox Text="{x:Bind ViewModel.Name}"/>
             <TextBlock Text="Celebration Date:" Style="{StaticResource Label}"/>
-            <!--<CalendarDatePicker PlaceholderText="Pick a date" Header="Calendar"                             
-                                Date="{x:Bind ViewModel.CelebrationDate, Mode=TwoWay}"
-                                DateFormat="{}{day.integer} {month.full} {year.full}"/>-->
-            <DatePicker Header="Pick a date" SelectedDate="{x:Bind ViewModel.CelebrationDate}"/>
+
+            <!--<DatePicker SelectedDate="{x:Bind ViewModel.CelebrationDate}"/>-->
+
             <TextBlock Text="Description:" Style="{StaticResource Label}"/>
             <TextBox Text="{x:Bind ViewModel.Description, Mode=TwoWay}" TextWrapping="Wrap" Height="200"/>
             <TextBlock Text="Record Date:" Style="{StaticResource Label}"/>
-            <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=TwoWay}" />
+            <!--<DatePicker SelectedDate="{x:Bind ViewModel.RecordDate}" />-->
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">

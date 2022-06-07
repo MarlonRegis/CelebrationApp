@@ -22,7 +22,6 @@ namespace CelebrationApp.Views
         public RegistrationPage()
         {
             this.InitializeComponent();
-            this.DataContext = ViewModel;
             
         }
 
