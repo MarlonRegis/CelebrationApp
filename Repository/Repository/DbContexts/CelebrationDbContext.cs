@@ -4,7 +4,7 @@ using Repository.DTOs;
 namespace Repository.DbContexts
 
 {
-    public class CelebrationDbContext : DbContext, ICelebrationDbContext
+    public class CelebrationDbContext : DbContext
     {
 
         public DbSet<CelebrationDTO> Reservations { get; set; }
