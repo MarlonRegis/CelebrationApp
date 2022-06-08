@@ -10,5 +10,5 @@
 
     <views:ExampleViewPage/>
 
-    <views:ListPage/>
+    <!--<views:ListPage/>-->
 </Window>

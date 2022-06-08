@@ -1,9 +1,6 @@
 ﻿using CelebrationApp.Commons;
 using CelebrationApp.Services;
-using CelebrationApp.Services.CelebrationCreators;
-using CelebrationApp.Services.Factory;
 using Microsoft.UI.Xaml;
-using Repository.DbContexts;
 using Repository.Repository.DbContexts;
 
 namespace CelebrationApp
