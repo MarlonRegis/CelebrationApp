@@ -29,7 +29,7 @@
     <Grid Background="LightGray">
       
         <StackPanel  HorizontalAlignment="Center" Margin="0,0,50,0" VerticalAlignment="Stretch">
-            <TextBlock Text="Registration note screen" FontSize="40" Margin="0,10,0,20"/>
+            <TextBlock Text="Registration note screen" FontSize="40" Margin="0,10,0,20" FontFamily="Poppins"/>
             <TextBlock Text="Name:" Style="{StaticResource Label}"/>
             <TextBox Text="{x:Bind ViewModel.Name, Mode=OneWay}"/>
             <DatePicker Header="Pick a Celebration Date:" 
