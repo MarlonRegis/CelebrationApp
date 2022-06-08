@@ -16,10 +16,10 @@ namespace CelebrationApp
 
         protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            using (var db = new CelebrationDbContext())
-            {
-                await db.Database.EnsureCreatedAsync();
-            }
+            //using (var db = new CelebrationDbContext())
+            //{
+            //    await db.Database.EnsureCreatedAsync();
+            //}
 
 
             m_window = new MainWindow();
