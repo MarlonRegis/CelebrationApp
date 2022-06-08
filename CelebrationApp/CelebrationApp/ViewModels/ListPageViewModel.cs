@@ -14,16 +14,13 @@ namespace CelebrationApp.ViewModels
         
         public void OpenList()
         {
-
-        }
-        public void Close()
-        {
-
-        }
+            
+        }        
         public void Create()
         {
-
+            
         }
+        
         public void Refrash()
         {
 

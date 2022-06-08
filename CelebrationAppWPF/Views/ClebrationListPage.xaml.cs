@@ -27,10 +27,6 @@ namespace CelebrationAppWPF.Views
             InitializeComponent();
             this.DataContext = new CelebrationListPageViewModel();
         }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.CLose();
-        }
+                
     }
 }

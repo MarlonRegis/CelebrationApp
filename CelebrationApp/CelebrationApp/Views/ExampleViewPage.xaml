@@ -8,9 +8,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <StackPanel>
         <DatePicker MinYear="{x:Bind ViewModel.arrivalDatePicker.MinYear}" 
                     MaxYear="{x:Bind ViewModel.arrivalDatePicker.MaxYear}"
-                    SelectedDateChanged="{x:Bind ViewModel.TestdateChanged}"
-                    YearVisible="False" />
+                    SelectedDateChanged="{x:Bind ViewModel.TestdateChanged}" />
+        
+        <TextBlock Text="{x:Bind ViewModel.TestTXT, Mode=OneWay}"/>
+        </StackPanel>
     </Grid>
 </Page>

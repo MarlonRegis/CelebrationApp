@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,13 @@ namespace CelebrationApp.ViewModels
     public class RegistrationPageViewModel : ObservableObject
     {
         public DatePicker datePicker { get; set; }
+
+        private object id;
+        public object ID
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
 
         private string name;
         public string Name
@@ -40,11 +48,25 @@ namespace CelebrationApp.ViewModels
             set => SetProperty(ref recordDate, value);
         }
 
-        private DateTime celebrationDate = DateTime.Now;
+        private DateTime celebrationDate;
         public DateTime CelebrationDate
         {
             get { return celebrationDate; }
             set => SetProperty(ref celebrationDate, value);
+        }
+
+        private string _updateRemoveVisible = "Collapsed";
+        public string UpdateRemoveVisible
+        {
+            get { return _updateRemoveVisible; }
+            set { SetProperty(ref _updateRemoveVisible, value); }
+        }
+
+        private string _saveClearVisible = "Visible";
+        public string SaveClearVisible
+        {
+            get { return _saveClearVisible; }
+            set { SetProperty(ref _saveClearVisible, value); }
         }
 
         public RegistrationPageViewModel()
@@ -58,20 +80,25 @@ namespace CelebrationApp.ViewModels
             datePicker = new DatePicker();
             datePicker.MinYear = DateTimeOffset.Now.AddYears(-100);
             datePicker.MaxYear = DateTimeOffset.Now;
-            datePicker.SelectedDateChanged += DateChanged;
+            datePicker.SelectedDateChanged += DateChanged;            
         }
 
         public void DateChanged(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)
         {
+            var newdate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
+            datePicker.SelectedDate = newdate;            
             if (datePicker.SelectedDate != null)
             {
-                CelebrationDate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
+                CelebrationDate = newdate;
             }
-            TextDate = CelebrationDate.ToString("dd/MM/yyyy");
+            TextDate = CelebrationDate.ToString("MM/dd/yyyy");
         }
-
-
+    
         public void Save()
+        {
+
+        }
+        public void Update()
         {
 
         }
@@ -88,6 +115,20 @@ namespace CelebrationApp.ViewModels
         {
 
         }
+        
 
+       /* protected void setComponent(ComponentViewModel e)
+        {        
+            SaveClearVisible = "Collapsed";
+            UpdateRemoveVisible = "Visible";
+        }
+
+        public void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ComponentViewModel componentViewModel = e.Parameter as ComponentViewModel;
+            if (componentViewModel != null)
+                setComponent(componentViewModel);
+        }
+       */
     }
 }

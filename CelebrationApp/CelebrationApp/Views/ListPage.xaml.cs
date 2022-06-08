@@ -28,7 +28,8 @@ namespace CelebrationApp.Views
         public ListPage()
         {
             this.InitializeComponent();
-            this.DataContext = new ListPageViewModel();
+            this.DataContext = new ListPageViewModel();            
         }
+        
     }
 }

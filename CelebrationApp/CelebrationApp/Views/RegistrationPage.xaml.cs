@@ -24,20 +24,6 @@ namespace CelebrationApp.Views
             this.InitializeComponent();
             this.DataContext = new RegistrationPageViewModel();
             
-        }
-
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Save();
-        }
-
-        private void Clean_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Clean();
-        }
-        private void Remove_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Remove();
-        }
+        }                
     }
 }

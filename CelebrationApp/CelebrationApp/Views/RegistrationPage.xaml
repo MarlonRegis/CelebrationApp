@@ -43,7 +43,8 @@
             <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=OneWay}" />
 
             <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Stretch">
-                <Button Content="Save" Click="{x:Bind ViewModel.Save}"/>
+                <Button Content="Save" Click="{x:Bind ViewModel.Save}" Visibility="{x:Bind ViewModel.SaveClearVisible, Mode=TwoWay}"/>
+                <Button Content="Update" Click="{x:Bind ViewModel.Update}" Visibility="{x:Bind ViewModel.UpdateRemoveVisible, Mode=TwoWay}"/>
                 <Button Content="Clean" Click="{x:Bind ViewModel.Clean}"/>
                 <Button Content="Remove" Click="{x:Bind ViewModel.Remove}"/>
             </StackPanel>

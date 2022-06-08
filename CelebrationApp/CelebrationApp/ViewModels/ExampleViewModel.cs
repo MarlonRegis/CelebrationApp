@@ -10,7 +10,21 @@ namespace CelebrationApp.ViewModels
 {
     public class ExampleViewModel: ObservableObject
     {
+        
         public DatePicker arrivalDatePicker { get; set; }
+
+        private string testTXT;
+        public string TestTXT
+        {
+            get
+            {
+                return testTXT;
+            }
+            set
+            {
+                SetProperty(ref testTXT, value);
+            }
+        }
 
         private DateTime dateOne;
         public DateTime DateOne
@@ -42,6 +56,7 @@ namespace CelebrationApp.ViewModels
             {
                 DateOne = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
             }
+            TestTXT = DateOne.ToString();
         }
     }
 }

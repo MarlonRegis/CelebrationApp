@@ -8,10 +8,7 @@ namespace CelebrationAppWPF.ViewModels
 {
     public class CelebrationListPageViewModel 
     {
-        public void CLose()
-        {
-
-        }
+      
 
     }
 }
