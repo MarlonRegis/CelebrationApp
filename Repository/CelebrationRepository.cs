@@ -32,7 +32,7 @@ namespace Repository
         public CelebrationDTO GetConflictingComponent(CelebrationDTO componentDTO)
         {
 
-            CelebrationDTO component = _context.Reservations
+            CelebrationDTO component = _context.Celebrations
                 .Where(c => c.Id == componentDTO.Id)
                 .Where(c => c.Name == componentDTO.Name)
                 .FirstOrDefault();
@@ -41,10 +41,6 @@ namespace Repository
                 return null;
 
             return component;
-        }
-        public async Task Commit()
-        {
-            await _context.SaveChangesAsync();
         }
 
     }

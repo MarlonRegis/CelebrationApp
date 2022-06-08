@@ -11,12 +11,12 @@ namespace CelebrationApp.ViewModels
 {
     public class ListPageViewModel : ObservableObject
     {
-        private ObservableCollection<CelebrationRecordViewModel> listCelebrations;
-        public ObservableCollection<CelebrationRecordViewModel> ListCelebrations
-        {
-            get { return listCelebrations; }
-            set { SetProperty(ref listCelebrations, value); }
-        }
+        //private ObservableCollection<CelebrationRecordViewModel> listCelebrations;
+        //public ObservableCollection<CelebrationRecordViewModel> ListCelebrations
+        //{
+        //    get { return listCelebrations; }
+        //    set { SetProperty(ref listCelebrations, value); }
+        //}
 
         
 

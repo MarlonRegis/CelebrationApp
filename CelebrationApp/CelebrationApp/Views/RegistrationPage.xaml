@@ -27,28 +27,29 @@
     </Page.Resources>
 
     <Grid Background="LightGray">
-      
-        <StackPanel  HorizontalAlignment="Center" Margin="0,0,50,0" VerticalAlignment="Stretch">
-            <TextBlock Text="Registration note screen" FontSize="40" Margin="0,10,0,20" FontFamily="Poppins"/>
-            <TextBlock Text="Name:" Style="{StaticResource Label}"/>
-            <TextBox Text="{x:Bind ViewModel.Name, Mode=OneWay}"/>
-            <DatePicker Header="Pick a Celebration Date:" 
+        <ScrollViewer>
+            <StackPanel  HorizontalAlignment="Center" Margin="0,0,50,0" VerticalAlignment="Stretch">
+                <TextBlock Text="Registration note screen" FontSize="40" Margin="0,10,0,20" FontFamily="Poppins"/>
+                <TextBlock Text="Name:" Style="{StaticResource Label}"/>
+                <TextBox Text="{x:Bind ViewModel.Name, Mode=OneWay}"/>
+                <DatePicker Header="Pick a Celebration Date:" 
                         SelectedDateChanged="{x:Bind ViewModel.DateChanged}" 
                         MinYear="{x:Bind ViewModel.datePicker.MinYear}"
                         MaxYear="{x:Bind ViewModel.datePicker.MaxYear}"/>
-            <TextBlock Text="Celebration Date:" Style="{StaticResource Label}"/>
-            <TextBlock Text="{x:Bind ViewModel.TextDate, Mode=OneWay}"/>
-            <TextBlock Text="Description:" Style="{StaticResource Label}"/>
-            <TextBox Text="{x:Bind ViewModel.Description, Mode=OneWay}" TextWrapping="Wrap" Height="200"/>
-            <TextBlock Text="Record Date:" Style="{StaticResource Label}"/>
-            <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=OneWay}" />
+                <TextBlock Text="Celebration Date:" Style="{StaticResource Label}"/>
+                <TextBlock Text="{x:Bind ViewModel.TextDate, Mode=OneWay}"/>
+                <TextBlock Text="Description:" Style="{StaticResource Label}"/>
+                <TextBox Text="{x:Bind ViewModel.Description, Mode=OneWay}" TextWrapping="Wrap" Height="200"/>
+                <TextBlock Text="Record Date:" Style="{StaticResource Label}"/>
+                <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=OneWay}" />
 
-            <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Stretch">
-                <Button Content="Save" Click="{x:Bind ViewModel.Save}"/>
-                <Button Content="Clean" Click="{x:Bind ViewModel.Clean}"/>
-                <Button Content="Remove" Click="{x:Bind ViewModel.Remove}"/>
+                <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Stretch">
+                    <Button Content="Save" Click="{x:Bind ViewModel.Save}"/>
+                    <Button Content="Clean" Click="{x:Bind ViewModel.Clean}"/>
+                    <Button Content="Remove" Click="{x:Bind ViewModel.Remove}"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
 
+        </ScrollViewer>
     </Grid>
 </Page>

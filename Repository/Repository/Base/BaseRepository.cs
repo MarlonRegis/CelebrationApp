@@ -41,6 +41,7 @@ namespace Repository.Repository.Base
         public virtual async Task Save(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
+
         }
 
         public virtual void Update(TEntity entity)

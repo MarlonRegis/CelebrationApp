@@ -8,7 +8,7 @@
     xmlns:views="using:CelebrationApp.Views"
     mc:Ignorable="d">
 
-    <views:RegistrationPage/>
+    <views:ExampleViewPage/>
 
     <!--<views:ListPage/>-->
 </Window>
