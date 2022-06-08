@@ -23,7 +23,6 @@
             <Setter Property="Margin" Value="10,0,0,10"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
-
     </Page.Resources>
 
     <Grid Background="LightGray">
