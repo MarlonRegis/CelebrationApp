@@ -33,14 +33,7 @@ namespace CelebrationApp.ViewModels
             get { return description; }
             set => SetProperty(ref description, value);
         }
-
-        private string textDate;
-        public string TextDate
-        {
-            get { return textDate; }
-            set => SetProperty(ref textDate, value);
-        }
-
+                
         private DateTime recordDate;
         public DateTime RecordDate
         {
@@ -84,14 +77,11 @@ namespace CelebrationApp.ViewModels
         }
 
         public void DateChanged(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)
-        {
-            var newdate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
-            datePicker.SelectedDate = newdate;            
+        {            
             if (datePicker.SelectedDate != null)
             {
-                CelebrationDate = newdate;
-            }
-            TextDate = CelebrationDate.ToString("MM/dd/yyyy");
+                CelebrationDate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day); 
+            }            
         }
     
         public void Save()
@@ -106,8 +96,7 @@ namespace CelebrationApp.ViewModels
         {
             Name = string.Empty;
             Description = string.Empty;
-            RecordDate = DateTime.Now;
-            TextDate = string.Empty;
+            RecordDate = DateTime.Now;            
             datePicker.SelectedDate = null;
             CelebrationDate = DateTime.Now;
         }
