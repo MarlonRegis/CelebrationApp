@@ -12,14 +12,14 @@ namespace CelebrationApp.Services.Factory
     {
         public Celebration createCelebration(Guid id, string name, string description, DateTime recordDate, DateTime celebrationDate)
         {
-            Celebration celebration = new Celebration(id, name, description, recordDate, celebrationDate);
+            Celebration celebration = new Celebration( name, description, recordDate, celebrationDate);
             return celebration;
         }
 
 
         public Celebration ToCelebration(CelebrationDTO res)
         {
-            return new Celebration(res.Id, res.Name, res.Description, res.RecordDate, res.CelebrationDate);
+            return new Celebration( res.Name, res.Description, res.RecordDate, res.CelebrationDate);
         }
 
         public CelebrationDTO ToCelebrationDTO(Celebration celebration)

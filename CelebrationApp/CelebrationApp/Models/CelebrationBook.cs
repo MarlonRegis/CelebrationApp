@@ -8,14 +8,14 @@ namespace CelebrationApp.Models
     {
         private readonly ICelebrationService _celebrationService;
 
-        public CelebrationBook(ICelebrationService celebrationService)
+        public CelebrationBook(CelebrationService celebrationService)
         {
             _celebrationService = celebrationService;
         }
 
-        public async Task<IEnumerable<Celebration>> GetAllReservations()
+        public IEnumerable<Celebration> GetAllCelebrations(int limitSource)
         {
-            return await _celebrationService.GetAllReservations();
+            return  _celebrationService.GetAllCelebrations(limitSource);
         }
 
         public async Task AddCelebration(Celebration reservation)

@@ -43,5 +43,10 @@ namespace Repository
             return component;
         }
 
+        public async Task Commit()
+        {
+            await _context.SaveChangesAsync();
+        }
+
     }
 }
