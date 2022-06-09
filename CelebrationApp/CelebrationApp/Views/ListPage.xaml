@@ -27,7 +27,8 @@
                 <Button Content="Open List" Click="{x:Bind ViewModel.OpenList}" Width="237" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,10,10,5"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">                    
                     <Button Content="Create" Click="{x:Bind ViewModel.Create}" Style="{StaticResource SmallButton}"/>
-                    <Button Content="Refrash" Click="{x:Bind ViewModel.Refrash}" Style="{StaticResource SmallButton}"/>                    
+                    <Button Content="Refrash" Click="{x:Bind ViewModel.Refrash}" Style="{StaticResource SmallButton}"/>
+                    <Button Content="Create" Click="{x:Bind ViewModel.Close}" Style="{StaticResource SmallButton}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

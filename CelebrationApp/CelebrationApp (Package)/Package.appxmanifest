@@ -8,7 +8,7 @@
 
   <Identity
     Name="0eb6de5d-77d7-4021-a574-bbc5c6ef2064"
-    Publisher="CN=mr.silva"
+    Publisher="CN=salomao.bl"
     Version="1.0.0.0" />
 
   <Properties>
@@ -39,6 +39,18 @@
         <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.protocol" Executable="CelebrationAppWPF/CelebrationAppWPF.exe" EntryPoint="Windows.FullTrustApplication">
+          <uap:Protocol Name="com.celebrationappwpf">
+            <uap:DisplayName>WPFToWinUi</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol" Executable="CelebrationApp/CelebrationApp.exe" EntryPoint="Windows.FullTrustApplication">
+          <uap:Protocol Name="com.celebrationapp">
+            <uap:DisplayName>WinUiToWPF</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
