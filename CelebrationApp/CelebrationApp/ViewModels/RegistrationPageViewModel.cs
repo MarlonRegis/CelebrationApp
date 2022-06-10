@@ -11,6 +11,13 @@ namespace CelebrationApp.ViewModels
     {
         public DatePicker datePicker { get; set; }
 
+        private object id;
+        public object ID
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
         private string name;
         public string Name
         {
@@ -29,13 +36,6 @@ namespace CelebrationApp.ViewModels
             set => SetProperty(ref description, value);
         }
 
-        private string textDate;
-        public string TextDate
-        {
-            get { return textDate; }
-            set => SetProperty(ref textDate, value);
-        }
-
         private DateTime recordDate;
         public DateTime RecordDate
         {
@@ -43,7 +43,7 @@ namespace CelebrationApp.ViewModels
             set => SetProperty(ref recordDate, value);
         }
 
-        private DateTime celebrationDate = DateTime.Now;
+        private DateTime celebrationDate;
         public DateTime CelebrationDate
         {
             get { return celebrationDate; }
@@ -53,6 +53,22 @@ namespace CelebrationApp.ViewModels
                 this.SubmitCommand.NotifyCanExecuteChanged();
             }
         }
+
+        private string _updateRemoveVisible = "Collapsed";
+        public string UpdateRemoveVisible
+        {
+            get { return _updateRemoveVisible; }
+            set { SetProperty(ref _updateRemoveVisible, value); }
+        }
+
+        private string _saveClearVisible = "Visible";
+        public string SaveClearVisible
+        {
+            get { return _saveClearVisible; }
+            set { SetProperty(ref _saveClearVisible, value); }
+        }
+
+
 
         public AsyncRelayCommand SubmitCommand { get; }
 
@@ -79,7 +95,6 @@ namespace CelebrationApp.ViewModels
             {
                 CelebrationDate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
             }
-            TextDate = CelebrationDate.ToString("dd/MM/yyyy");
         }
 
         public void Clean()
@@ -87,7 +102,6 @@ namespace CelebrationApp.ViewModels
             Name = string.Empty;
             Description = string.Empty;
             RecordDate = DateTime.Now;
-            TextDate = string.Empty;
             datePicker.SelectedDate = null;
             CelebrationDate = DateTime.Now;
         }
@@ -96,7 +110,16 @@ namespace CelebrationApp.ViewModels
 
         }
 
-
-
+        //protected void setComponent(ComponentViewModel e)
+        //{
+        //    SaveClearVisible = "Collapsed";
+        //    UpdateRemoveVisible = "Visible";
+        //}
+        //public void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    ComponentViewModel componentViewModel = e.Parameter as ComponentViewModel;
+        //    if (componentViewModel != null)
+        //        setComponent(componentViewModel);
+        //}
     }
 }

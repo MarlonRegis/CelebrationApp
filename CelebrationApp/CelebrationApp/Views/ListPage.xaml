@@ -22,14 +22,12 @@
                 <TextBlock Text="Celebration App" FontSize="40" Margin="0,10,0,20" HorizontalAlignment="Center"/>
                 <TextBlock Text="Day Celebrations:" FontSize="20" HorizontalAlignment="Center" Margin="0,10,350,10"/>
                 <Grid Width="500" Height="250" Background="Black"/>
-                
-                
                 <TextBlock Text="Month Celebrations:" FontSize="20" HorizontalAlignment="Center" Margin="0,10,330,10"/>
                 <Grid Width="500" Height="250" Background="White"/>
                 <Button Content="Open List" Click="{x:Bind ViewModel.OpenList}" Width="237" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,10,10,5"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">                    
                     <Button Content="Create" Click="{x:Bind ViewModel.Create}" Style="{StaticResource SmallButton}"/>
-                    <Button Content="Refrash" Click="{x:Bind ViewModel.Refrash}" Style="{StaticResource SmallButton}"/>
+                    <Button Content="Refresh" Click="{x:Bind ViewModel.Refresh}" Style="{StaticResource SmallButton}"/>
                     <Button Content="Close" Click="{x:Bind ViewModel.Close}" Style="{StaticResource SmallButton}"/>
                 </StackPanel>
             </StackPanel>
