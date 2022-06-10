@@ -1,10 +1,9 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using CelebrationApp.Commands;
+using CelebrationApp.Stores;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CelebrationApp.ViewModels
 {
@@ -16,7 +15,11 @@ namespace CelebrationApp.ViewModels
         public string Name
         {
             get { return name; }
-            set => SetProperty(ref name, value);
+            set
+            {
+                SetProperty(ref name, value);
+                this.SubmitCommand.NotifyCanExecuteChanged();
+            }
         }
 
         private string description;
@@ -44,12 +47,21 @@ namespace CelebrationApp.ViewModels
         public DateTime CelebrationDate
         {
             get { return celebrationDate; }
-            set => SetProperty(ref celebrationDate, value);
+            set
+            {
+                SetProperty(ref celebrationDate, value);
+                this.SubmitCommand.NotifyCanExecuteChanged();
+            }
         }
 
-        public RegistrationPageViewModel()
+        public AsyncRelayCommand SubmitCommand { get; }
+
+        public RegistrationPageViewModel(MainStore mainStore)
         {
             DateControl();
+            MakeCelebrationCommand makeCelebrationCommand = new MakeCelebrationCommand(this, mainStore);
+
+            SubmitCommand = new AsyncRelayCommand(makeCelebrationCommand.SaveCelebration, makeCelebrationCommand.CanExecute);
         }
 
         private void DateControl()
@@ -70,11 +82,6 @@ namespace CelebrationApp.ViewModels
             TextDate = CelebrationDate.ToString("dd/MM/yyyy");
         }
 
-
-        public void Save()
-        {
-
-        }
         public void Clean()
         {
             Name = string.Empty;
@@ -88,6 +95,8 @@ namespace CelebrationApp.ViewModels
         {
 
         }
+
+
 
     }
 }

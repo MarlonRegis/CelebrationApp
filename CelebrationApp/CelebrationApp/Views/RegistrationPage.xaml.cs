@@ -1,4 +1,6 @@
-﻿using CelebrationApp.ViewModels;
+﻿using CelebrationApp.Services;
+using CelebrationApp.ViewModels;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -22,22 +24,9 @@ namespace CelebrationApp.Views
         public RegistrationPage()
         {
             this.InitializeComponent();
-            this.DataContext = new RegistrationPageViewModel();
-            
+            RegistrationPageViewModel ViewModel = Ioc.Default.GetRequiredService<RegistrationPageViewModel>();
+            this.DataContext = ViewModel;
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Save();
-        }
-
-        private void Clean_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Clean();
-        }
-        private void Remove_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Remove();
-        }
     }
 }

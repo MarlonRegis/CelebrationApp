@@ -8,9 +8,8 @@ namespace CelebrationApp.Models
 {
     public class Celebration
     {
-        public Celebration(Guid id, string name, string description, DateTime recordDate, DateTime celebrationDate)
+        public Celebration( string name, string description, DateTime recordDate, DateTime celebrationDate)
         {
-            this.id = id;
             Name = name;
             Description = description;
             RecordDate = recordDate;

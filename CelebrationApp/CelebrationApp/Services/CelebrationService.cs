@@ -15,45 +15,44 @@ namespace CelebrationApp.Services
 {
     public class CelebrationService : ICelebrationService
     {
-        private readonly CelebrationDbContextFactory _dbContextFactory;
         private readonly CelebrationFactory _celebrationFactory;
-        private readonly CelebrationDbContext _contextCelebration;
+        private readonly CelebrationRepository _celebrationRepository;
 
-        public CelebrationService(CelebrationDbContextFactory dbContextFactory)
+
+        public CelebrationService(CelebrationRepository celebrationRepository)
         {
-            _dbContextFactory = dbContextFactory;
-            _contextCelebration = _dbContextFactory.CreateDbContext();
+            _celebrationRepository = celebrationRepository;
             _celebrationFactory = new CelebrationFactory();
         }
 
         public async Task CreateCelebration(Celebration celebration)
         {
-                CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
+            CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
 
-                _contextCelebration.Celebrations.Add(celebrationDTO);
-                await _contextCelebration.SaveChangesAsync();
+            await _celebrationRepository.Save(celebrationDTO);
+            await _celebrationRepository.Commit();
         }
 
         public async Task UpdateCelebration(Celebration celebration)
         {
 
-                CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
-                _contextCelebration.Celebrations.Update(celebrationDTO);
-                await _contextCelebration.SaveChangesAsync();
+            CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
+            _celebrationRepository.Update(celebrationDTO);
+            await _celebrationRepository.Commit();
         }
 
         public async Task DeleteCelebration(Celebration celebration)
         {
 
-                CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
-                _contextCelebration.Celebrations.Remove(celebrationDTO);
-                await _contextCelebration.SaveChangesAsync();
+            CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
+            _celebrationRepository.Remove(celebrationDTO);
+            await _celebrationRepository.Commit();
         }
 
-        public async Task<IEnumerable<Celebration>> GetAllReservations()
+        public IEnumerable<Celebration> GetAllCelebrations(int celebrationLimit)
         {
-                IEnumerable<CelebrationDTO> reservationDtos = await _contextCelebration.Celebrations.ToListAsync();
-                return reservationDtos.Select(res => _celebrationFactory.ToCelebration(res));
+            IEnumerable<CelebrationDTO> celebrationDTOs = _celebrationRepository.GetAll(celebrationLimit);
+            return celebrationDTOs.Select(res => _celebrationFactory.ToCelebration(res));
         }
 
     }

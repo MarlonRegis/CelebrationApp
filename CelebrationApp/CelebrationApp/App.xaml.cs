@@ -1,24 +1,19 @@
-﻿using CelebrationApp.Commons;
-using CelebrationApp.Services;
+﻿using CelebrationApp.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
-using Repository.Repository.DbContexts;
 
 namespace CelebrationApp
 {
 
     public partial class App : Application
     {
-        private static string CONNECTION_STRTING = $"Data Source={GlobalVariables.DataBaseString}";
-
-        private readonly CelebrationDbContextFactory _dbContextFactory;
+        public static FrameworkElement MainRoot { get; private set; }
 
         public App()
         {
             this.InitializeComponent();
 
-            _dbContextFactory = new CelebrationDbContextFactory(CONNECTION_STRTING);
-            ICelebrationService celebrationService = new CelebrationService(_dbContextFactory);
-
+            CelebrationServiceProvider.CreateDefaultServices();
         }
 
         protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
@@ -26,8 +21,7 @@ namespace CelebrationApp
 
             m_window = new MainWindow();
             m_window.Activate();
-
-            
+            MainRoot = m_window.Content as FrameworkElement;
         }
 
         private Window m_window;

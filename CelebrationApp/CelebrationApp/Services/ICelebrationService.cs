@@ -8,7 +8,7 @@ namespace CelebrationApp.Services
     {
         Task CreateCelebration(Celebration celebration);
         Task DeleteCelebration(Celebration celebration);
-        Task<IEnumerable<Celebration>> GetAllReservations();
+        IEnumerable<Celebration> GetAllCelebrations(int celebrationLimit);
         Task UpdateCelebration(Celebration celebration);
     }
 }
