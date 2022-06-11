@@ -2,6 +2,7 @@
 using CelebrationApp.Models;
 using CelebrationApp.Stores;
 using CelebrationApp.ViewModels;
+using CelebrationApp.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Repository;
@@ -16,7 +17,7 @@ namespace CelebrationApp.Services
         private static CelebrationDbContextFactory _dbContextFactory;
         private static string CONNECTION_STRTING = $"Data Source={GlobalVariables.DataBaseString}";
         private static ServiceCollection _servicesProvider = new ServiceCollection();
-
+        private static NavigationService _navigationService;
 
         public static void CreateDefaultServices()
         {
@@ -42,6 +43,13 @@ namespace CelebrationApp.Services
         private static void AddServices()
         {
             _servicesProvider.AddSingleton((s) => new CelebrationService(s.GetRequiredService<CelebrationRepository>()));
+
+            _navigationService = new NavigationService();
+            _navigationService.Configure(typeof(ListPageViewModel), typeof(ListPage));
+            _navigationService.Configure(typeof(RegistrationPageViewModel), typeof(RegistrationPage));
+
+            _servicesProvider.AddSingleton<NavigationService>(_navigationService);
+
         }
         private static void AddModels()
         {
@@ -58,7 +66,7 @@ namespace CelebrationApp.Services
         private static void AddViewModels()
         {
            
-            _servicesProvider.AddTransient((s) => new RegistrationPageViewModel(s.GetRequiredService<MainStore>()));
+            _servicesProvider.AddTransient((s) => new RegistrationPageViewModel(s.GetRequiredService<MainStore>(), s.GetRequiredService<NavigationService>()));
         }
 
     }
