@@ -1,5 +1,9 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using CelebrationApp.Models;
+using CelebrationApp.Stores;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,12 +11,68 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 
 namespace CelebrationApp.ViewModels
 {
     public class ListPageViewModel : ObservableObject
     {
+        private readonly ObservableCollection<CelebrationRecordViewModel> celebrationListDay;
+        public IEnumerable<CelebrationRecordViewModel> CelebrationListDay => celebrationListDay;
+
+        private readonly ObservableCollection<CelebrationRecordViewModel> celebrationListMonth;
+        public IEnumerable<CelebrationRecordViewModel> CelebrationListMonth => celebrationListMonth;
+
+        public ICommand LoadCelebrationCommand { get; }
+        public ICommand MakeCelebrationCommand { get; }
+
+
+        public ListPageViewModel(MainStore mainStore)//Adicionar Service Navigate
+        {
+            celebrationListDay = new ObservableCollection<CelebrationRecordViewModel>();
+            celebrationListMonth = new ObservableCollection<CelebrationRecordViewModel>();
+
+            LoadCelebrationCommand = new LoadCelebrationCommand(this, mainStore); // Adicionar Comando Load
+            MakeCelebrationCommand = new NavigateCommand(makeReservationNavigationService); //Adicionar Comando Navigate
+        }
+        public static ListPageViewModel LoadViewModel(MainStore mainStore)//Adicionar Service Navigate
+        {
+            ListPageViewModel viewModel = new ListPageViewModel(mainStore);//Adicionar Service Navigate
+            viewModel.LoadCelebrationCommand.Execute(null);
+
+            return viewModel;
+        }
+
+        public void UpdateList(IEnumerable<Celebration> list)
+        {
+
+            foreach (Celebration item in list)
+            {
+
+                if (item.CelebrationDate.Day == DateTime.Now.Day)
+                {
+                    CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
+                    celebrationListDay.Add(celebrationRecordViewModel);
+                }
+                if (item.CelebrationDate.Month == DateTime.Now.Month)
+                {
+                    CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
+                    celebrationListMonth.Add(celebrationRecordViewModel);
+                }
+
+            }
+
+        }
+
+        public void OpenRegistrationPage(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is CelebrationRecordViewModel Celebration)
+            {
+                //   navigationService.Navigate(PageTokens.RegistrationScreenPage, Celebration.Id); //Navegação
+            }
+
+        }
 
         public void OpenList()
         {
@@ -20,8 +80,6 @@ namespace CelebrationApp.ViewModels
             toWPFProcess.StartInfo.FileName = "com.celebrationappwpf://";
             toWPFProcess.StartInfo.UseShellExecute = true;
             toWPFProcess.Start();
-
-
         }
         public void Close()
         {
