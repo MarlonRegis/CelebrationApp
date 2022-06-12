@@ -1,6 +1,10 @@
-﻿using CelebrationApp.Models;
+﻿using CelebrationApp.Commands;
+using CelebrationApp.Models;
+using CelebrationApp.Services;
 using CelebrationApp.Stores;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
@@ -24,21 +28,22 @@ namespace CelebrationApp.ViewModels
         private readonly ObservableCollection<CelebrationRecordViewModel> celebrationListMonth;
         public IEnumerable<CelebrationRecordViewModel> CelebrationListMonth => celebrationListMonth;
 
-        public ICommand LoadCelebrationCommand { get; }
-        public ICommand MakeCelebrationCommand { get; }
+        public AsyncRelayCommand LoadCelebrationCommand { get; }
+        public RelayCommand MakeCelebrationCommand { get; }
 
 
-        public ListPageViewModel(MainStore mainStore)//Adicionar Service Navigate
+        public ListPageViewModel(MainStore mainStore, NavigationService navigationService)
         {
             celebrationListDay = new ObservableCollection<CelebrationRecordViewModel>();
             celebrationListMonth = new ObservableCollection<CelebrationRecordViewModel>();
 
-            LoadCelebrationCommand = new LoadCelebrationCommand(this, mainStore); // Adicionar Comando Load
-            MakeCelebrationCommand = new NavigateCommand(makeReservationNavigationService); //Adicionar Comando Navigate
+            CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
+            LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadComponents);
+            MakeCelebrationCommand = new RelayCommand(new NavigateCommand<RegistrationPageViewModel>(navigationService).Navigate);
         }
-        public static ListPageViewModel LoadViewModel(MainStore mainStore)//Adicionar Service Navigate
+        public static ListPageViewModel LoadViewModel(MainStore mainStore, NavigationService navigationService)
         {
-            ListPageViewModel viewModel = new ListPageViewModel(mainStore);//Adicionar Service Navigate
+            ListPageViewModel viewModel = new ListPageViewModel(mainStore, navigationService);
             viewModel.LoadCelebrationCommand.Execute(null);
 
             return viewModel;
@@ -84,14 +89,6 @@ namespace CelebrationApp.ViewModels
         public void Close()
         {
             Application.Current.Exit();
-        }
-        public void Create()
-        {
-
-        }
-        public void Refresh()
-        {
-
         }
     }
 }

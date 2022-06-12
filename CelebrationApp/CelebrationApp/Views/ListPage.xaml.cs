@@ -1,4 +1,5 @@
 ﻿using CelebrationApp.ViewModels;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -28,7 +29,8 @@ namespace CelebrationApp.Views
         public ListPage()
         {
             this.InitializeComponent();
-            this.DataContext = new ListPageViewModel();
+            ListPageViewModel ViewModel = Ioc.Default.GetRequiredService<ListPageViewModel>();
+            this.DataContext = ViewModel;
         }
     }
 }

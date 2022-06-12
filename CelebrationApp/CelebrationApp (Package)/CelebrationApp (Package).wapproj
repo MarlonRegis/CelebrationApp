@@ -42,7 +42,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\CelebrationApp\CelebrationApp.csproj</EntryPointProjectUniqueName>
-    <PackageCertificateThumbprint>EC13C8A38C3A5A9326B8CD9349BC0AE702814349</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>1CFE0E2C100185CC86400A4AD2EBA66A3D5B644B</PackageCertificateThumbprint>
     <PackageCertificateKeyFile>CelebrationApp %28Package%29_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>

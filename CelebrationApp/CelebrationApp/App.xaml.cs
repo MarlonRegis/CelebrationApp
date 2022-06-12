@@ -20,7 +20,7 @@ namespace CelebrationApp
             CelebrationServiceProvider.CreateDefaultServices();
         }
 
-        protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
 
             m_window = new MainWindow();
@@ -29,7 +29,7 @@ namespace CelebrationApp
 
             if (rootFrame.Content == null)
             {
-                rootFrame.Navigate(typeof(RegistrationPage), args.Arguments);
+                rootFrame.Navigate(typeof(ListPage), args.Arguments);
             }
 
             m_window.Activate();

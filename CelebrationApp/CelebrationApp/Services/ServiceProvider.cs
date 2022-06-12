@@ -67,6 +67,7 @@ namespace CelebrationApp.Services
         {
            
             _servicesProvider.AddTransient((s) => new RegistrationPageViewModel(s.GetRequiredService<MainStore>(), s.GetRequiredService<NavigationService>()));
+            _servicesProvider.AddTransient((s) => new ListPageViewModel(s.GetRequiredService<MainStore>(), s.GetRequiredService<NavigationService>()));
         }
 
     }

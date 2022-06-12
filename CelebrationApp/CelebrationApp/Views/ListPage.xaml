@@ -52,8 +52,8 @@
                 </ScrollViewer>
                 <Button Content="Open List" Click="{x:Bind ViewModel.OpenList}" Width="237" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,10,10,5"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Content="Create" Click="{x:Bind ViewModel.Create}" Style="{StaticResource SmallButton}"/>
-                    <Button Content="Refresh" Click="{x:Bind ViewModel.Refresh}" Style="{StaticResource SmallButton}"/>
+                    <Button Content="Create" Command="{x:Bind ViewModel.MakeCelebrationCommand}" Style="{StaticResource SmallButton}"/>
+                    <Button Content="Refresh" Command="{x:Bind ViewModel.LoadCelebrationCommand}" Style="{StaticResource SmallButton}"/>
                     <Button Content="Close" Click="{x:Bind ViewModel.Close}" Style="{StaticResource SmallButton}"/>
                 </StackPanel>
             </StackPanel>

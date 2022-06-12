@@ -59,7 +59,6 @@
                             Background="LightBlue"
                             CornerRadius="20"/>
                     <Button Content="Remove"
-                            Click="{x:Bind ViewModel.Remove}"
                             Background="LightCoral"
                             CornerRadius="20"/>
                     <Button Content="Cancel"

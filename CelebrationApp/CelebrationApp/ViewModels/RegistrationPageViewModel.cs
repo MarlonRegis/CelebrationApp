@@ -110,15 +110,6 @@ namespace CelebrationApp.ViewModels
             datePicker.SelectedDate = null;
             CelebrationDate = DateTime.Now;
         }
-        public void Remove()
-        {
-
-        }
-
-        public void Cancel()
-        {
-
-        }
 
         //protected void setComponent(ComponentViewModel e)
         //{
