@@ -16,5 +16,12 @@
       </PackageReference>
       <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
       <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
+      <PackageReference Include="NLog" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

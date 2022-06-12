@@ -1,4 +1,5 @@
 ﻿using CelebrationApp.Commands;
+using CelebrationApp.Services;
 using CelebrationApp.Stores;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -69,15 +70,19 @@ namespace CelebrationApp.ViewModels
         }
 
 
-
+        private readonly NavigationService _navigationService;
         public AsyncRelayCommand SubmitCommand { get; }
+        public RelayCommand CancelCommand { get; }
 
-        public RegistrationPageViewModel(MainStore mainStore)
+        public RegistrationPageViewModel(MainStore mainStore, NavigationService navigationService)
         {
             DateControl();
             MakeCelebrationCommand makeCelebrationCommand = new MakeCelebrationCommand(this, mainStore);
 
             SubmitCommand = new AsyncRelayCommand(makeCelebrationCommand.SaveCelebration, makeCelebrationCommand.CanExecute);
+            CancelCommand = new RelayCommand(new NavigateCommand<ListPageViewModel>(navigationService).Navigate);
+
+            _navigationService = navigationService;
         }
 
         private void DateControl()
@@ -104,10 +109,6 @@ namespace CelebrationApp.ViewModels
             RecordDate = DateTime.Now;
             datePicker.SelectedDate = null;
             CelebrationDate = DateTime.Now;
-        }
-        public void Remove()
-        {
-
         }
 
         //protected void setComponent(ComponentViewModel e)

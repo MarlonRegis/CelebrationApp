@@ -59,7 +59,10 @@
                             Background="LightBlue"
                             CornerRadius="20"/>
                     <Button Content="Remove"
-                            Click="{x:Bind ViewModel.Remove}"
+                            Background="LightCoral"
+                            CornerRadius="20"/>
+                    <Button Content="Cancel"
+                            Command="{x:Bind ViewModel.CancelCommand}"
                             Background="LightCoral"
                             CornerRadius="20"/>
                 </StackPanel>
