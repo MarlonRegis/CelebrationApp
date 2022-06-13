@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.System;
 
 namespace CelebrationApp.ViewModels
 {
@@ -52,14 +53,14 @@ namespace CelebrationApp.ViewModels
             return viewModel;
         }
 
-        public void UpdateList(IEnumerable<Celebration> list)
+        public virtual void UpdateList(IEnumerable<Celebration> list)
         {
             celebrationListDay.Clear();
             celebrationListMonth.Clear();
 
             foreach (Celebration item in list)
             {                
-                if (item.CelebrationDate.Day == DateTime.Now.Day)
+                if (item.CelebrationDate.Day == DateTime.Now.Day && item.CelebrationDate.Month == DateTime.Now.Month)
                 {
                     CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
                     celebrationListDay.Add(celebrationRecordViewModel);
@@ -83,12 +84,14 @@ namespace CelebrationApp.ViewModels
 
         }
 
-        public void OpenList()
+        public async void OpenList()
         {
-            var toWPFProcess = new Process();
-            toWPFProcess.StartInfo.FileName = "com.celebrationappwpf://";
-            toWPFProcess.StartInfo.UseShellExecute = true;
-            toWPFProcess.Start();
+            //var toWPFProcess = new Process();
+            //toWPFProcess.StartInfo.FileName = "com.celebrationappwpf://";
+            //toWPFProcess.StartInfo.UseShellExecute = true;
+            //toWPFProcess.Start();
+
+            await Launcher.LaunchUriAsync(new System.Uri("com.celebrationappwpf://"));
         }
         public void Close()
         {

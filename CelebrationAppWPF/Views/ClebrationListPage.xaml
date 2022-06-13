@@ -13,8 +13,44 @@
         <ScrollViewer>
             <StackPanel>
                 <TextBlock Text="Celebrations List" FontSize="40" Margin="0,10,0,20" HorizontalAlignment="Center"/>
-                <Grid Width="500" Height="300" Background="Black"/>
-                <Button Content="Close" Width="60" Click="Close_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                <Grid Width="500" Height="300" Background="Black">
+
+                    <ListView Margin="0 25 0 0" ItemsSource="{Binding CelebrationList}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" Padding="0 0 20 0"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Celebration Date">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding CelebrationDate}" Padding="0 0 20 0"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Record Date">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding RegisterDate}" Padding="0 0 20 0"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+                <Button Content="Edit" Width="50" Margin="10"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

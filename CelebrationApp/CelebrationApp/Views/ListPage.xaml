@@ -11,19 +11,30 @@
 
     <Page.Resources>
         <DataTemplate x:Key="CelebrationTemplate" x:DataType="viewmodels:CelebrationRecordViewModel" >
-            <Grid Padding="0,0,0,20" Background="LightSkyBlue">
-                <StackPanel>
+            <Grid Padding="0,0,0,20" Background="White">
+                <StackPanel Orientation="Horizontal">
                     <Image Source="{x:Bind Image}" Width="100" Height="100" Margin="0,0,20,0"/>
-
                     <StackPanel  VerticalAlignment="Center">
-                        <TextBlock Text="{x:Bind Name}"/>
-                        <TextBlock Text="{x:Bind CelebrationDate}"/>
-                        <TextBlock Text="{x:Bind RegisterDate}"/>                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name: "/>
+                            <TextBlock Text="{x:Bind Name}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Date: "/>
+                            <TextBlock Text="{x:Bind CelebrationDate}"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Grid>
         </DataTemplate>
 
+        <Style TargetType="Grid" x:Key="Gridlayout" >
+            <Setter Property="Margin" Value="300,10,300,10"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="Background" Value="LightSkyBlue"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
         <Style TargetType="Button" x:Key="SmallButton" >
             <Setter Property="Margin" Value="10,0,0,10"/>
             <Setter Property="Width" Value="70"/>
@@ -34,20 +45,28 @@
         <ScrollViewer>
             <StackPanel>
                 <TextBlock Text="Celebration App" FontSize="40" Margin="0,10,0,20" HorizontalAlignment="Center"/>
-                <TextBlock Text="Day Celebrations:" FontSize="20" HorizontalAlignment="Center" Margin="0,10,350,10"/>
-                     <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
-                      ItemsSource="{x:Bind ViewModel.CelebrationListDay}"
-                      SelectionMode="None"
-                      IsItemClickEnabled="True"
-                      ItemClick="{x:Bind ViewModel.OpenRegistrationPage}"/>
-                
-                <TextBlock Text="Month Celebrations:" FontSize="20" HorizontalAlignment="Center" Margin="0,10,330,10"/>
-                   <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
-                      ItemsSource="{x:Bind ViewModel.CelebrationListMonth}"
-                      SelectionMode="None"
-                      IsItemClickEnabled="True"
-                      ItemClick="{x:Bind ViewModel.OpenRegistrationPage}"/>
-                
+                <TextBlock Text="Day Celebrations:" FontSize="20" Margin="300,10,0,10"/>
+                <ScrollViewer>
+                    <Grid Style="{StaticResource Gridlayout}">
+                        <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
+                                  ItemsSource="{x:Bind ViewModel.CelebrationListDay}"
+                                  SelectionMode="None"
+                                  IsItemClickEnabled="True"
+                                  ItemClick="{x:Bind ViewModel.OpenRegistrationPage}"
+                                  Margin="0,10,10,0"/>
+                    </Grid>
+                </ScrollViewer>
+                <TextBlock Text="Month Celebrations:" FontSize="20" Margin="300,10,0,10"/>
+                <ScrollViewer>
+                    <Grid Style="{StaticResource Gridlayout}">
+                        <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
+                                  ItemsSource="{x:Bind ViewModel.CelebrationListMonth}"
+                                  SelectionMode="None"
+                                  IsItemClickEnabled="True"
+                                  ItemClick="{x:Bind ViewModel.OpenRegistrationPage}"
+                                  Margin="0,10,10,0"/>
+                    </Grid>
+                </ScrollViewer>
                 <Button Content="Open List" Click="{x:Bind ViewModel.OpenList}" Width="237" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,10,10,5"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Content="Create" Command="{x:Bind ViewModel.MakeCelebrationCommand}" Style="{StaticResource SmallButton}"/>
