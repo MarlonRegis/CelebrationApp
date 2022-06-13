@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.System;
 
 namespace CelebrationApp.ViewModels
 {
@@ -81,12 +82,14 @@ namespace CelebrationApp.ViewModels
 
         }
 
-        public void OpenList()
+        public async void OpenList()
         {
-            var toWPFProcess = new Process();
-            toWPFProcess.StartInfo.FileName = "com.celebrationappwpf://";
-            toWPFProcess.StartInfo.UseShellExecute = true;
-            toWPFProcess.Start();
+            //var toWPFProcess = new Process();
+            //toWPFProcess.StartInfo.FileName = "com.celebrationappwpf://";
+            //toWPFProcess.StartInfo.UseShellExecute = true;
+            //toWPFProcess.Start();
+
+            await Launcher.LaunchUriAsync(new System.Uri("com.celebrationappwpf://"));
         }
         public void Close()
         {

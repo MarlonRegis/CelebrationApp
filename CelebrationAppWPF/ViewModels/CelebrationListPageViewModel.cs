@@ -23,6 +23,7 @@ namespace CelebrationAppWPF.ViewModels
 
         public CelebrationListPageViewModel(MainStore mainStore, NavigationService navigationService) : base(mainStore, navigationService)
         {
+            celebrationList = new ObservableCollection<CelebrationRecordViewModel>();
             CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
             LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadComponents);
         }

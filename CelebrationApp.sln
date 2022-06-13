@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelebrationApp", "Celebrati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelebrationRepository", "Repository\CelebrationRepository.csproj", "{1B2BBD29-AEF6-495C-8F1B-608B8E8674FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelebrationAppWPF", "CelebrationAppWPF\CelebrationAppWPF.csproj", "{631B9FA5-874D-4EA3-AF84-26726E1C54AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelebrationAppWPF", "CelebrationAppWPF\CelebrationAppWPF.csproj", "{631B9FA5-874D-4EA3-AF84-26726E1C54AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +83,10 @@ Global
 		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|arm64.ActiveCfg = Debug|Any CPU
 		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|arm64.Build.0 = Debug|Any CPU
-		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x64.Build.0 = Debug|Any CPU
-		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x86.Build.0 = Debug|Any CPU
+		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x64.ActiveCfg = Debug|x64
+		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x64.Build.0 = Debug|x64
+		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x86.ActiveCfg = Debug|x86
+		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Debug|x86.Build.0 = Debug|x86
 		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{631B9FA5-874D-4EA3-AF84-26726E1C54AF}.Release|arm64.ActiveCfg = Release|Any CPU

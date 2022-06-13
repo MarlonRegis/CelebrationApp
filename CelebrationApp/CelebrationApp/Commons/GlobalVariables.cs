@@ -8,7 +8,7 @@ namespace CelebrationApp.Commons
 {
     public class GlobalVariables
     {
-
-        public const string DataBaseString = "c:/Sidi/study/FinalProject/CelebrationApp/Repository/celebration.db";
+        
+        public const string DataBaseString = "c:/Users/salomao.bl/source/repos/CelebrationApp/Final Project/Repository/celebration.db";
     }
 }
