@@ -17,8 +17,8 @@
 
                     <StackPanel  VerticalAlignment="Center">
                         <TextBlock Text="{x:Bind Name}"/>
-                        <TextBlock Text="{x:Bind RegisterDate}"/>
-                        <TextBlock Text="{x:Bind Description}"/>
+                        <TextBlock Text="{x:Bind CelebrationDate}"/>
+                        <TextBlock Text="{x:Bind RegisterDate}"/>                        
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -35,21 +35,19 @@
             <StackPanel>
                 <TextBlock Text="Celebration App" FontSize="40" Margin="0,10,0,20" HorizontalAlignment="Center"/>
                 <TextBlock Text="Day Celebrations:" FontSize="20" HorizontalAlignment="Center" Margin="0,10,350,10"/>
-                <ScrollViewer>
-                    <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
+                     <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
                       ItemsSource="{x:Bind ViewModel.CelebrationListDay}"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
                       ItemClick="{x:Bind ViewModel.OpenRegistrationPage}"/>
-                </ScrollViewer>
+                
                 <TextBlock Text="Month Celebrations:" FontSize="20" HorizontalAlignment="Center" Margin="0,10,330,10"/>
-                <ScrollViewer>
-                    <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
+                   <GridView ItemTemplate="{StaticResource CelebrationTemplate}"
                       ItemsSource="{x:Bind ViewModel.CelebrationListMonth}"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
                       ItemClick="{x:Bind ViewModel.OpenRegistrationPage}"/>
-                </ScrollViewer>
+                
                 <Button Content="Open List" Click="{x:Bind ViewModel.OpenList}" Width="237" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,10,10,5"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Content="Create" Command="{x:Bind ViewModel.MakeCelebrationCommand}" Style="{StaticResource SmallButton}"/>
