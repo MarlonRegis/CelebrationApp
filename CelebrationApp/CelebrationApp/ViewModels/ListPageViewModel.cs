@@ -30,18 +30,20 @@ namespace CelebrationApp.ViewModels
 
         public AsyncRelayCommand LoadCelebrationCommand { get; }
         public RelayCommand MakeCelebrationCommand { get; }
-
+        public NavigationService _navigationService { get; }
 
         public ListPageViewModel(MainStore mainStore, NavigationService navigationService)
         {
+
             celebrationListDay = new ObservableCollection<CelebrationRecordViewModel>();
             celebrationListMonth = new ObservableCollection<CelebrationRecordViewModel>();
 
             CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
             LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadComponents);
             MakeCelebrationCommand = new RelayCommand(new NavigateCommand<RegistrationPageViewModel>(navigationService).Navigate);
-            
+            _navigationService = navigationService;
         }
+
         public static ListPageViewModel LoadViewModel(MainStore mainStore, NavigationService navigationService)
         {
             ListPageViewModel viewModel = new ListPageViewModel(mainStore, navigationService);
@@ -76,7 +78,7 @@ namespace CelebrationApp.ViewModels
         {
             if (e.ClickedItem is CelebrationRecordViewModel Celebration)
             {
-                //   navigationService.Navigate(PageTokens.RegistrationScreenPage, Celebration.Id); //Navegação
+                _navigationService.Navigate<RegistrationPageViewModel>(Celebration);
             }
 
         }

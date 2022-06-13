@@ -30,13 +30,16 @@ namespace CelebrationApp.Commands
                     await ModalView.MessageDialogAsync(App.MainRoot, "Error", "Not found celebrations");
                 }
                 _listPageViewModel.UpdateList(_mainStore.CelebrationEnumerable);
-                           
-                //_listPageViewModel.UpdateComponents(_mainStore.Components);
             }
             catch
             {
                 await ModalView.MessageDialogAsync(App.MainRoot, "Error", "Error");
             }
+        }
+
+        public async Task OpenDetailsCelebration()
+        {
+
         }
     }
 }

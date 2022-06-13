@@ -1,4 +1,5 @@
 ﻿using CelebrationApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,19 +19,19 @@ namespace CelebrationApp.Models
             return  _celebrationService.GetAllCelebrations(limitSource);
         }
 
-        public async Task AddCelebration(Celebration reservation)
+        public async Task AddCelebration(Celebration celebration)
         {
-            await _celebrationService.CreateCelebration(reservation);
+            await _celebrationService.CreateCelebration(celebration);
         }
         
-        public async Task UpdateCelebration(Celebration reservation)
+        public async Task UpdateCelebration(Celebration celebration)
         {
-            await _celebrationService.UpdateCelebration(reservation);
+            await _celebrationService.UpdateCelebration(celebration);
         }
         
-        public async Task DeleteCelebration(Celebration reservation)
+        public async Task DeleteCelebration(object id)
         {
-            await _celebrationService.DeleteCelebration(reservation);
+            await _celebrationService.DeleteCelebration(id);
         }
 
 

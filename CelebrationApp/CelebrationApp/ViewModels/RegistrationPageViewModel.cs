@@ -4,7 +4,9 @@ using CelebrationApp.Stores;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Collections.Generic;
 
 namespace CelebrationApp.ViewModels
 {
@@ -69,19 +71,23 @@ namespace CelebrationApp.ViewModels
             set { SetProperty(ref _saveClearVisible, value); }
         }
 
-
+        private readonly MainStore _mainStore;
         private readonly NavigationService _navigationService;
         public AsyncRelayCommand SubmitCommand { get; }
+        public AsyncRelayCommand UpdateCommand { get; }
+        public AsyncRelayCommand RemoveCelebration { get; }
         public RelayCommand CancelCommand { get; }
 
         public RegistrationPageViewModel(MainStore mainStore, NavigationService navigationService)
         {
             DateControl();
-            MakeCelebrationCommand makeCelebrationCommand = new MakeCelebrationCommand(this, mainStore);
+            MakeCelebrationCommand makeCelebrationCommand = new MakeCelebrationCommand(this, mainStore, navigationService);
 
             SubmitCommand = new AsyncRelayCommand(makeCelebrationCommand.SaveCelebration, makeCelebrationCommand.CanExecute);
+            UpdateCommand = new AsyncRelayCommand(makeCelebrationCommand.UpdateCelebration, makeCelebrationCommand.CanExecute);
+            RemoveCelebration = new AsyncRelayCommand(makeCelebrationCommand.RemoveCelebration, makeCelebrationCommand.CanExecute);
             CancelCommand = new RelayCommand(new NavigateCommand<ListPageViewModel>(navigationService).Navigate);
-
+            _mainStore = mainStore;
             _navigationService = navigationService;
         }
 
@@ -96,7 +102,7 @@ namespace CelebrationApp.ViewModels
 
         public void DateChanged(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)
         {
-            if (datePicker.SelectedDate != null)
+            if (datePicker.SelectedDate == null)
             {
                 CelebrationDate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
             }
@@ -107,20 +113,30 @@ namespace CelebrationApp.ViewModels
             Name = string.Empty;
             Description = string.Empty;
             RecordDate = DateTime.Now;
-            datePicker.SelectedDate = null;
+            datePicker.SelectedDate = new DateTime(2022,01,01);
             CelebrationDate = DateTime.Now;
         }
 
-        //protected void setComponent(ComponentViewModel e)
-        //{
-        //    SaveClearVisible = "Collapsed";
-        //    UpdateRemoveVisible = "Visible";
-        //}
-        //public void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    ComponentViewModel componentViewModel = e.Parameter as ComponentViewModel;
-        //    if (componentViewModel != null)
-        //        setComponent(componentViewModel);
-        //}
+        public void OnNavigatedTo(NavigationEventArgs e)
+        {
+            CelebrationRecordViewModel celebrationRecordViewModel = e.Parameter as CelebrationRecordViewModel;
+            if (celebrationRecordViewModel != null)
+                setComponent(celebrationRecordViewModel);
+        }
+
+        protected void setComponent(CelebrationRecordViewModel e)
+        {
+            ID = e.Id;
+            Name = e.Name;
+            Description = e.Description;
+            CelebrationDate = e.CelebrationDate;
+            datePicker.SelectedDate = e.CelebrationDate;
+            RecordDate = e.RegisterDate;
+
+            SaveClearVisible = "Collapsed";
+            UpdateRemoveVisible = "Visible";
+        }
     }
+    
 }
+

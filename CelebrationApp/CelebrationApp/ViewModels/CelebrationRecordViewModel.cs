@@ -10,7 +10,14 @@ namespace CelebrationApp.ViewModels
 {
     public class CelebrationRecordViewModel : ObservableObject
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
+
+        private object id;
+        public object Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
 
         private string name;
         public string Name

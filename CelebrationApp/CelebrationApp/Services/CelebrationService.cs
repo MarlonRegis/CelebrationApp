@@ -1,14 +1,10 @@
 ﻿using CelebrationApp.Models;
 using CelebrationApp.Services.Factory;
-using Microsoft.EntityFrameworkCore;
 using Repository;
-using Repository.DbContexts;
 using Repository.DTOs;
-using Repository.Repository.DbContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CelebrationApp.Services
@@ -36,16 +32,22 @@ namespace CelebrationApp.Services
         public async Task UpdateCelebration(Celebration celebration)
         {
 
-            CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
+            CelebrationDTO celebrationDTO = _celebrationRepository.GetById(celebration.id);
+
+            celebrationDTO.Name = celebration.Name;
+            celebrationDTO.Description = celebration.Description;
+            celebrationDTO.CelebrationDate = celebration.CelebrationDate;
+            celebrationDTO.RecordDate = celebration.RecordDate;
+
             _celebrationRepository.Update(celebrationDTO);
             await _celebrationRepository.Commit();
         }
 
-        public async Task DeleteCelebration(Celebration celebration)
+        public async Task DeleteCelebration(object id)
         {
 
-            CelebrationDTO celebrationDTO = _celebrationFactory.ToCelebrationDTO(celebration);
-            _celebrationRepository.Remove(celebrationDTO);
+            var celebration = _celebrationRepository.GetById(id);
+            _celebrationRepository.Remove(celebration);
             await _celebrationRepository.Commit();
         }
 

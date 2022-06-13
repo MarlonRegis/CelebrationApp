@@ -16,9 +16,9 @@ namespace CelebrationApp.Stores
 
         public IEnumerable<Celebration> CelebrationEnumerable => _celebrations;
 
-        public IEnumerable<Celebration> Components => _celebrations;
+        public IEnumerable<Celebration> Celebrations => _celebrations;
 
-        public event Action<Celebration> ComponentMade;
+        public event Action<Celebration> CelebrationsMade;
 
         private int _celebrationLimit = 0;
         public int CelebrationLimit
@@ -58,19 +58,19 @@ namespace CelebrationApp.Stores
             OnComponentSave(celebration);
         }
 
-        public async Task UpdateComponent(Celebration celebration)
+        public async Task UpdateCelebration(Celebration celebration)
         {
             await _main.UpdateCelebration(celebration);
         }
 
-        public async Task RemoveComponent(Celebration celebration)
+        public async Task RemoveCelebration(object id)
         {
-            await _main.DeleteCelebration(celebration);
+            await _main.DeleteCelebration(id);
         }
 
         private void OnComponentSave(Celebration component)
         {
-            ComponentMade?.Invoke(component);
+            CelebrationsMade?.Invoke(component);
         }
 
         private Task Initialize()

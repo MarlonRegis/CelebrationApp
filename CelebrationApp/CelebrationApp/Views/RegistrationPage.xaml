@@ -53,6 +53,7 @@
                     <Button Content="Update"
                             Visibility="{x:Bind ViewModel.UpdateRemoveVisible, Mode=TwoWay}"
                             Background="LightGreen"
+                            Command="{x:Bind ViewModel.UpdateCommand}"
                             CornerRadius="20"/>
                     <Button Content="Clean"
                             Click="{x:Bind ViewModel.Clean}"
@@ -60,6 +61,7 @@
                             CornerRadius="20"/>
                     <Button Content="Remove"
                             Background="LightCoral"
+                            Command="{x:Bind ViewModel.RemoveCelebration}"
                             CornerRadius="20"/>
                     <Button Content="Cancel"
                             Command="{x:Bind ViewModel.CancelCommand}"

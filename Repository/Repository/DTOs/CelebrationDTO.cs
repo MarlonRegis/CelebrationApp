@@ -12,7 +12,6 @@ namespace Repository.DTOs
     {
         public string Name { get; set; }
         public string Description { get; set; }
-
         public DateTime RecordDate { get; set; }
         public DateTime CelebrationDate { get; set; }
     }

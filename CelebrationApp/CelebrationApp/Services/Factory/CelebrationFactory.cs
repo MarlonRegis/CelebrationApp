@@ -10,7 +10,7 @@ namespace CelebrationApp.Services.Factory
 {
     public class CelebrationFactory
     {
-        public Celebration createCelebration(Guid id, string name, string description, DateTime recordDate, DateTime celebrationDate)
+        public Celebration createCelebration(string name, string description, DateTime recordDate, DateTime celebrationDate)
         {
             Celebration celebration = new Celebration( name, description, recordDate, celebrationDate);
             return celebration;
@@ -19,7 +19,7 @@ namespace CelebrationApp.Services.Factory
 
         public Celebration ToCelebration(CelebrationDTO res)
         {
-            return new Celebration( res.Name, res.Description, res.RecordDate, res.CelebrationDate);
+            return new Celebration( res.Name, res.Description, res.RecordDate, res.CelebrationDate, res.Id);
         }
 
         public CelebrationDTO ToCelebrationDTO(Celebration celebration)

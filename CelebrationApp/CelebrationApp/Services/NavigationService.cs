@@ -1,9 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CelebrationApp.Services
 {
@@ -20,7 +17,7 @@ namespace CelebrationApp.Services
 
         public void SetFrame(Frame frame) => _frame = frame;
 
-        public void Navigate<TViewModel>(object args)
+        public void Navigate<TViewModel>(object args = null)
         {
             if (_viewMapping.ContainsKey(typeof(TViewModel))){
                 Frame.Navigate(_viewMapping[typeof(TViewModel)], args);

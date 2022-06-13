@@ -21,11 +21,18 @@ namespace CelebrationApp.Views
     public sealed partial class RegistrationPage : Page
     {
         public RegistrationPageViewModel ViewModel => (RegistrationPageViewModel)this.DataContext;
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            ViewModel.OnNavigatedTo(e);
+
+
+        }
         public RegistrationPage()
         {
             this.InitializeComponent();
-            RegistrationPageViewModel ViewModel = Ioc.Default.GetRequiredService<RegistrationPageViewModel>();
-            this.DataContext = ViewModel;
+            DataContext = Ioc.Default.GetRequiredService<RegistrationPageViewModel>();
         }
 
     }

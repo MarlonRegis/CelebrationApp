@@ -8,15 +8,16 @@ namespace CelebrationApp.Models
 {
     public class Celebration
     {
-        public Celebration( string name, string description, DateTime recordDate, DateTime celebrationDate)
+        public Celebration( string name, string description, DateTime recordDate, DateTime celebrationDate, object id = null)
         {
+            this.id = id;
             Name = name;
             Description = description;
             RecordDate = recordDate;
             CelebrationDate = celebrationDate;
         }
 
-        public Guid id { get; set; }
+        public object id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime RecordDate { get; set; }

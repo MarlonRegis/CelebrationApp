@@ -33,9 +33,9 @@ namespace CelebrationApp.Models
             await _celebrationBook.UpdateCelebration(celebration);
         }
 
-        public async Task DeleteCelebration(Celebration celebration)
+        public async Task DeleteCelebration(object id)
         {
-            await _celebrationBook.DeleteCelebration(celebration);
+            await _celebrationBook.DeleteCelebration(id);
         }
     }
 }
