@@ -57,7 +57,7 @@ namespace CelebrationApp.ViewModels
 
             foreach (Celebration item in list)
             {                
-                if (item.CelebrationDate.Day == DateTime.Now.Day)
+                if (item.CelebrationDate.Day == DateTime.Now.Day && item.CelebrationDate.Month == DateTime.Now.Month)
                 {
                     CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
                     celebrationListDay.Add(celebrationRecordViewModel);
