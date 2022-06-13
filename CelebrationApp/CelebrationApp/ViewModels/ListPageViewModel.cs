@@ -50,7 +50,7 @@ namespace CelebrationApp.ViewModels
             return viewModel;
         }
 
-        public void UpdateList(IEnumerable<Celebration> list)
+        public virtual void UpdateList(IEnumerable<Celebration> list)
         {
             celebrationListDay.Clear();
             celebrationListMonth.Clear();
