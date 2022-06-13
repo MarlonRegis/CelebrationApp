@@ -40,6 +40,7 @@ namespace CelebrationApp.ViewModels
             CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
             LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadComponents);
             MakeCelebrationCommand = new RelayCommand(new NavigateCommand<RegistrationPageViewModel>(navigationService).Navigate);
+            
         }
         public static ListPageViewModel LoadViewModel(MainStore mainStore, NavigationService navigationService)
         {
@@ -51,10 +52,11 @@ namespace CelebrationApp.ViewModels
 
         public void UpdateList(IEnumerable<Celebration> list)
         {
+            celebrationListDay.Clear();
+            celebrationListMonth.Clear();
 
             foreach (Celebration item in list)
-            {
-
+            {                
                 if (item.CelebrationDate.Day == DateTime.Now.Day)
                 {
                     CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);

@@ -24,14 +24,13 @@ namespace CelebrationApp.Commands
         {
             try
             {
-                await _mainStore.Load();
-
+                await _mainStore.Load(); 
                 if (_mainStore.CelebrationEnumerable.Any() == false)
                 {
-                   await ModalView.MessageDialogAsync(App.MainRoot, "Error", "Not found celebrations");
+                    await ModalView.MessageDialogAsync(App.MainRoot, "Error", "Not found celebrations");
                 }
-
-
+                _listPageViewModel.UpdateList(_mainStore.CelebrationEnumerable);
+                           
                 //_listPageViewModel.UpdateComponents(_mainStore.Components);
             }
             catch
