@@ -7,6 +7,8 @@
       mc:Ignorable="d"
       xmlns:viewmodels="using:CelebrationAppWPF.ViewModels"
       d:DesignHeight="450" d:DesignWidth="800"
+      
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       Title="ClebrationListPage">
 
     <Grid Background="LightGray">
@@ -21,7 +23,7 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                             </Style>
                         </ListView.ItemContainerStyle>
-                        <ListView.View>
+                        <ListView.View >
                             <GridView>
                                 <GridViewColumn Header="Name">
                                     <GridViewColumn.CellTemplate>
