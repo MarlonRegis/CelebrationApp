@@ -15,16 +15,26 @@ namespace CelebrationAppWPF.ViewModels
 {
     public class CelebrationListPageViewModel : ListPageViewModel
     {
+        private CelebrationRecordViewModel _selectedCelebration;
+        public CelebrationRecordViewModel SelectedCelebration
+        {
+            get { return _selectedCelebration; }
+            set { SetProperty(ref _selectedCelebration, value); }
+        }
+
         private readonly ObservableCollection<CelebrationRecordViewModel> celebrationList;
         public IEnumerable<CelebrationRecordViewModel> CelebrationList => celebrationList;
 
         public AsyncRelayCommand LoadCelebrationCommand { get; }        
+        public RelayCommand<CelebrationRecordViewModel> OpenCelebrationCommand { get; }        
 
 
         public CelebrationListPageViewModel(MainStore mainStore, NavigationService navigationService) : base(mainStore, navigationService)
         {
             celebrationList = new ObservableCollection<CelebrationRecordViewModel>();
             CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
+
+            OpenCelebrationCommand = new RelayCommand<CelebrationRecordViewModel>(celebrationListingCommand.OpenDetailsCelebration);
             LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadComponents);
         }
 

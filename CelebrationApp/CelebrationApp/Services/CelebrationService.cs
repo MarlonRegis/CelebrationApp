@@ -57,5 +57,11 @@ namespace CelebrationApp.Services
             return celebrationDTOs.Select(res => _celebrationFactory.ToCelebration(res));
         }
 
+        public Celebration GetCelebrationByID(object id)
+        {
+            Celebration celebration = _celebrationFactory.ToCelebration(_celebrationRepository.GetById(id));
+            return celebration;
+        }
+
     }
 }

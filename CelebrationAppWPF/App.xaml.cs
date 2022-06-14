@@ -1,16 +1,8 @@
 ﻿using CelebrationAppWPF.Services;
-using CelebrationAppWPF.ViewModels;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
 
 namespace CelebrationAppWPF
 {
@@ -19,21 +11,17 @@ namespace CelebrationAppWPF
         private Mutex _mutex;
 
 
-
         public App()
         {
             ServiceProvider.CreateDefaultServices();
         }
 
+        //protected override void OnStartup(StartupEventArgs e)
+        //{
+        //    //CreateRootFrame();
 
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            CreateRootFrame();
-
-            base.OnStartup(e);
-        }
-
+        //    base.OnStartup(e);
+        //}
 
 
         protected override void OnActivated(EventArgs e)
@@ -56,19 +44,13 @@ namespace CelebrationAppWPF
             base.OnActivated(e);
         }
 
-
-
-        private void CreateRootFrame()
-        {
-           // Ioc.Default.GetRequiredService<NavigationStore>().CurrentViewModel = Ioc.Default.GetRequiredService<ComponentListingViewModel>();
-
-
-
-            MainWindow = new MainWindow()
-            {                
-                DataContext = Ioc.Default.GetRequiredService<CelebrationListPageViewModel>()
-            };
-            MainWindow.Show();
-        }
+        //private void CreateRootFrame()
+        //{
+        //    MainWindow = new MainWindow()
+        //    {
+        //        DataContext = Ioc.Default.GetRequiredService<CelebrationListPageViewModel>()
+        //    };
+        //    MainWindow.Show();
+        //}
     }
 }

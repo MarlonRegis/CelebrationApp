@@ -20,11 +20,11 @@ using System.Windows.Shapes;
 namespace CelebrationAppWPF.Views
 {
 
-    public partial class ClebrationListPage : Page
+    public partial class CelebrationListPage : Page
     {
         public CelebrationListPageViewModel ViewModel => (CelebrationListPageViewModel)this.DataContext;
         
-        public ClebrationListPage()
+        public CelebrationListPage()
         {
             InitializeComponent();          
             CelebrationListPageViewModel ViewModel = Ioc.Default.GetRequiredService<CelebrationListPageViewModel>();

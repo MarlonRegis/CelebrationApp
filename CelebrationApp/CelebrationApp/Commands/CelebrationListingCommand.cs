@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.System;
 
 namespace CelebrationApp.Commands
 {
@@ -37,9 +38,10 @@ namespace CelebrationApp.Commands
             }
         }
 
-        public async Task OpenDetailsCelebration()
+        public async void OpenDetailsCelebration(CelebrationRecordViewModel celebration)
         {
-
+                string ID = Uri.EscapeDataString($"{celebration.Id}");
+                await Launcher.LaunchUriAsync(new System.Uri($"com.celebrationapp://?ID={ID}"));
         }
     }
 }

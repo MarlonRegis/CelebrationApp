@@ -86,11 +86,7 @@ namespace CelebrationApp.ViewModels
 
         public async void OpenList()
         {
-            //var toWPFProcess = new Process();
-            //toWPFProcess.StartInfo.FileName = "com.celebrationappwpf://";
-            //toWPFProcess.StartInfo.UseShellExecute = true;
-            //toWPFProcess.Start();
-
+            
             await Launcher.LaunchUriAsync(new System.Uri("com.celebrationappwpf://"));
         }
         public void Close()

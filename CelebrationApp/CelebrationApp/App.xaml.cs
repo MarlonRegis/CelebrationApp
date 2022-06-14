@@ -1,10 +1,15 @@
 ﻿using CelebrationApp.Services;
+using CelebrationApp.ViewModels;
 using CelebrationApp.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.AppLifecycle;
 using System;
+using System.Threading.Tasks;
+using System.Web;
+using Windows.ApplicationModel.Activation;
 
 namespace CelebrationApp
 {
@@ -20,8 +25,15 @@ namespace CelebrationApp
             CelebrationServiceProvider.CreateDefaultServices();
         }
 
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            AppActivationArguments argsActivated =
+                Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
+
+            ExtendedActivationKind kind = argsActivated.Kind;
+
+            Microsoft.Windows.AppLifecycle.AppInstance keyInstance =
+                Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("SampleMainRegister");
 
             m_window = new MainWindow();
 
@@ -32,10 +44,32 @@ namespace CelebrationApp
                 rootFrame.Navigate(typeof(ListPage), args.Arguments);
             }
 
+            if (kind == ExtendedActivationKind.Protocol)
+                await NavigateToComponent(argsActivated, keyInstance);
+
+
             m_window.Activate();
             MainRoot = m_window.Content as FrameworkElement;
 
 
+        }
+
+        private static async Task NavigateToComponent(AppActivationArguments argsActivated, Microsoft.Windows.AppLifecycle.AppInstance keyInstance)
+        {
+            await keyInstance.RedirectActivationToAsync(argsActivated);
+
+            object celebrationId = null;
+
+            if (argsActivated.Data is IProtocolActivatedEventArgs protocolArgs)
+            {
+                celebrationId = HttpUtility.ParseQueryString(protocolArgs.Uri.Query).Get("ID");
+            }
+            celebrationId = celebrationId.ToString().Replace("\"", "");
+
+            var celebration = Ioc.Default.GetRequiredService<CelebrationService>().GetCelebrationByID(Guid.Parse((string)celebrationId));
+            var celebrationRecordViewModel = new CelebrationRecordViewModel(celebration);
+
+            Ioc.Default.GetRequiredService<NavigationService>().Navigate<RegistrationPageViewModel>(celebrationRecordViewModel);
         }
 
         private Frame CreateRootFrame()
