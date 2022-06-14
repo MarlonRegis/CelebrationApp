@@ -1,5 +1,5 @@
-﻿using CelebrationApp.Models;
-using CelebrationApp.Services.Factory;
+﻿using CelebrationCore.Models;
+using CelebrationCore.Services.Factory;
 using Repository;
 using Repository.DTOs;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Services
+namespace CelebrationCore.Services
 {
     public class CelebrationService : ICelebrationService
     {
@@ -32,7 +32,7 @@ namespace CelebrationApp.Services
         public async Task UpdateCelebration(Celebration celebration)
         {
 
-            CelebrationDTO celebrationDTO = _celebrationRepository.GetById(celebration.id);
+            CelebrationDTO celebrationDTO = _celebrationRepository.GetById(celebration.Id);
 
             celebrationDTO.Name = celebration.Name;
             celebrationDTO.Description = celebration.Description;

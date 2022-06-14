@@ -6,14 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:viewmodels="using:CelebrationApp.ViewModels"
+    xmlns:viewmodels="using:CelebrationCore.ViewModels"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
         <DataTemplate x:Key="CelebrationTemplate" x:DataType="viewmodels:CelebrationRecordViewModel" >
             <Grid Padding="0,0,0,20" Background="White">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{x:Bind Image}" Width="100" Height="100" Margin="0,0,20,0"/>
+                    
+                    <Image Source="ms-appx:///../CelebrationCore/Assets/Images/Gift.png" Width="100" Height="100" Margin="0,0,20,0"/>
                     <StackPanel  VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Name: "/>

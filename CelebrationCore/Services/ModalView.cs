@@ -6,13 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Services
+namespace CelebrationCore.Services
 {
     public static class ModalView
     {
         public static async Task MessageDialogAsync(this FrameworkElement element, string title, string message)
         {
-            await MessageDialogAsync(element, title, message, "OK");
+            if (element != null)
+            {
+                await MessageDialogAsync(element, title, message, "OK");
+            }
         }
 
         public static async Task MessageDialogAsync(this FrameworkElement element, string title, string message, string buttonText)
@@ -29,15 +32,6 @@ namespace CelebrationApp.Services
             await dialog.ShowAsync();
         }
 
-        public static async Task<bool?> ConfirmationDialogAsync(this FrameworkElement element, string title)
-        {
-            return await ConfirmationDialogAsync(element, title, "OK", string.Empty, "Cancel");
-        }
-
-        public static async Task<bool> ConfirmationDialogAsync(this FrameworkElement element, string title, string yesButtonText, string noButtonText)
-        {
-            return (await ConfirmationDialogAsync(element, title, yesButtonText, noButtonText, string.Empty)).Value;
-        }
 
         public static async Task<bool?> ConfirmationDialogAsync(this FrameworkElement element, string title, string yesButtonText, string noButtonText, string cancelButtonText)
         {
@@ -60,10 +54,6 @@ namespace CelebrationApp.Services
             return (result == ContentDialogResult.Primary);
         }
 
-        public static async Task<string> InputStringDialogAsync(this FrameworkElement element, string title)
-        {
-            return await element.InputStringDialogAsync(title, string.Empty);
-        }
 
         public static async Task<string> InputStringDialogAsync(this FrameworkElement element, string title, string defaultText)
         {
@@ -100,10 +90,6 @@ namespace CelebrationApp.Services
             }
         }
 
-        public static async Task<string> InputTextDialogAsync(this FrameworkElement element, string title)
-        {
-            return await element.InputTextDialogAsync(title, string.Empty);
-        }
 
         public static async Task<string> InputTextDialogAsync(this FrameworkElement element, string title, string defaultText)
         {

@@ -1,9 +1,9 @@
-﻿using CelebrationApp.Services;
+﻿using CelebrationCore.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Models
+namespace CelebrationCore.Models
 {
     public class CelebrationBook
     {

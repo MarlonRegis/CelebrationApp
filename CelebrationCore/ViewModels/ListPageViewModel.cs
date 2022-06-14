@@ -1,25 +1,15 @@
-﻿using CelebrationApp.Commands;
-using CelebrationApp.Models;
-using CelebrationApp.Services;
-using CelebrationApp.Stores;
+﻿using CelebrationCore.Commands;
+using CelebrationCore.Models;
+using CelebrationCore.Services;
+using CelebrationCore.Stores;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.ApplicationModel.Core;
 using Windows.System;
 
-namespace CelebrationApp.ViewModels
+namespace CelebrationCore.ViewModels
 {
     public class ListPageViewModel : ObservableObject
     {
@@ -28,10 +18,11 @@ namespace CelebrationApp.ViewModels
 
         private readonly ObservableCollection<CelebrationRecordViewModel> celebrationListMonth;
         public IEnumerable<CelebrationRecordViewModel> CelebrationListMonth => celebrationListMonth;
-
         public AsyncRelayCommand LoadCelebrationCommand { get; }
         public RelayCommand MakeCelebrationCommand { get; }
         public NavigationService _navigationService { get; }
+
+
 
         public ListPageViewModel(MainStore mainStore, NavigationService navigationService)
         {
@@ -40,7 +31,7 @@ namespace CelebrationApp.ViewModels
             celebrationListMonth = new ObservableCollection<CelebrationRecordViewModel>();
 
             CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
-            LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadComponents);
+            LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadCelebration);
             MakeCelebrationCommand = new RelayCommand(new NavigateCommand<RegistrationPageViewModel>(navigationService).Navigate);
             _navigationService = navigationService;
         }
@@ -70,9 +61,7 @@ namespace CelebrationApp.ViewModels
                     CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
                     celebrationListMonth.Add(celebrationRecordViewModel);
                 }
-
             }
-
         }
 
         public void OpenRegistrationPage(object sender, ItemClickEventArgs e)
@@ -81,7 +70,6 @@ namespace CelebrationApp.ViewModels
             {
                 _navigationService.Navigate<RegistrationPageViewModel>(Celebration);
             }
-
         }
 
         public async void OpenList()

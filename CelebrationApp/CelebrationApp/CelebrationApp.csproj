@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
-		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
 		<RootNamespace>CelebrationApp</RootNamespace>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<Platforms>x86;x64;arm64</Platforms>
@@ -19,7 +18,7 @@
 		<PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
-		<PackageReference Include="NLog" Version="5.0.0" />
+		<PackageReference Include="NLog" Version="5.0.1" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
@@ -35,12 +34,8 @@
 		</Page>
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\CelebrationCore\CelebrationCore.csproj" />
 		<ProjectReference Include="..\..\Repository\CelebrationRepository.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Update="nlog.config">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 
 </Project>

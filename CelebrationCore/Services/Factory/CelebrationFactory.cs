@@ -1,4 +1,4 @@
-﻿using CelebrationApp.Models;
+﻿using CelebrationCore.Models;
 using Repository.DTOs;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Services.Factory
+namespace CelebrationCore.Services.Factory
 {
     public class CelebrationFactory
     {

@@ -1,11 +1,12 @@
-﻿using CelebrationApp.Models;
+﻿using CelebrationCore.Models;
+using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Stores
+namespace CelebrationCore.Stores
 {
     public class MainStore
     {
@@ -13,6 +14,8 @@ namespace CelebrationApp.Stores
         private readonly Main _main;
         private readonly List<Celebration> _celebrations;
         private Lazy<Task> _initializeLazy;
+        public FrameworkElement MainRoot { get; set; }
+
 
         public IEnumerable<Celebration> CelebrationEnumerable => _celebrations;
 
@@ -20,19 +23,16 @@ namespace CelebrationApp.Stores
 
         public event Action<Celebration> CelebrationsMade;
 
-        private int _celebrationLimit = 0;
-        public int CelebrationLimit
-        {
-            get { return _celebrationLimit; }
-            set { _celebrationLimit = value; }
-        }
+        public int CelebrationLimit { get; set; } = 0;
 
         public MainStore(Main main)
         {
-            _main = main;
-            _initializeLazy = new Lazy<Task>(Initialize);
-
-            _celebrations = new List<Celebration>();
+            if (main != null)
+            {
+                _main = main;
+                _initializeLazy = new Lazy<Task>(Initialize);
+                _celebrations = new List<Celebration>();
+            }
         }
 
         public async Task Load()
@@ -55,7 +55,7 @@ namespace CelebrationApp.Stores
 
             _celebrations.Add(celebration);
 
-            OnComponentSave(celebration);
+            OnCelebrationSave(celebration);
         }
 
         public async Task UpdateCelebration(Celebration celebration)
@@ -68,9 +68,9 @@ namespace CelebrationApp.Stores
             await _main.DeleteCelebration(id);
         }
 
-        private void OnComponentSave(Celebration component)
+        private void OnCelebrationSave(Celebration celebration)
         {
-            CelebrationsMade?.Invoke(component);
+            CelebrationsMade?.Invoke(celebration);
         }
 
         private Task Initialize()

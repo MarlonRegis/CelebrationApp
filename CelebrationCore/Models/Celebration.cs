@@ -4,20 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Models
+namespace CelebrationCore.Models
 {
     public class Celebration
     {
-        public Celebration( string name, string description, DateTime recordDate, DateTime celebrationDate, object id = null)
+        public Celebration(string name, string description, DateTime recordDate, DateTime celebrationDate, object id = null)
         {
-            this.id = id;
+            if (id != null)
+            {
+                Id = id;
+            }
+
             Name = name;
             Description = description;
             RecordDate = recordDate;
             CelebrationDate = celebrationDate;
         }
 
-        public object id { get; set; }
+        public object Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime RecordDate { get; set; }

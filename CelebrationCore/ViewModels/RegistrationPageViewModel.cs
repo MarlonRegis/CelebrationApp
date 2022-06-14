@@ -1,6 +1,6 @@
-﻿using CelebrationApp.Commands;
-using CelebrationApp.Services;
-using CelebrationApp.Stores;
+﻿using CelebrationCore.Commands;
+using CelebrationCore.Services;
+using CelebrationCore.Stores;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
@@ -8,7 +8,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 
-namespace CelebrationApp.ViewModels
+namespace CelebrationCore.ViewModels
 {
     public class RegistrationPageViewModel : ObservableObject
     {
@@ -102,7 +102,7 @@ namespace CelebrationApp.ViewModels
 
         public void DateChanged(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)
         {
-            if (datePicker.SelectedDate == null)
+            if (datePicker.SelectedDate == null && args.NewDate != null)
             {
                 CelebrationDate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
             }
@@ -119,12 +119,16 @@ namespace CelebrationApp.ViewModels
 
         public void OnNavigatedTo(NavigationEventArgs e)
         {
-            CelebrationRecordViewModel celebrationRecordViewModel = e.Parameter as CelebrationRecordViewModel;
-            if (celebrationRecordViewModel != null)
-                setComponent(celebrationRecordViewModel);
+            if(e.Parameter != null)
+            {
+                CelebrationRecordViewModel celebrationRecordViewModel = e.Parameter as CelebrationRecordViewModel;
+                if (celebrationRecordViewModel != null)
+                    setCelebration(celebrationRecordViewModel);
+            }
+            
         }
 
-        protected void setComponent(CelebrationRecordViewModel e)
+        protected void setCelebration(CelebrationRecordViewModel e)
         {
             ID = e.Id;
             Name = e.Name;

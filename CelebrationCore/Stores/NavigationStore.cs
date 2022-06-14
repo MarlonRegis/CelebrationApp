@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Stores
+namespace CelebrationCore.Stores
 {
     public class NavigationStore
     {
         public event Action CurrentViewModelChanged;
 
-        public ObservableObject _currentViewModel;
+        private ObservableObject _currentViewModel;
         public ObservableObject CurrentViewModel
         {
-            get { return _currentViewModel; }
+            get 
+            { return _currentViewModel; }
             set
             {
                 _currentViewModel = value;

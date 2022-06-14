@@ -1,9 +1,9 @@
-﻿using CelebrationApp.Models;
+﻿using CelebrationCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Services
+namespace CelebrationCore.Services
 {
     public interface ICelebrationService
     {

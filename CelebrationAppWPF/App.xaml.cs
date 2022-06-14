@@ -10,7 +10,6 @@ namespace CelebrationAppWPF
     {
         private Mutex _mutex;
 
-
         public App()
         {
             ServiceProvider.CreateDefaultServices();

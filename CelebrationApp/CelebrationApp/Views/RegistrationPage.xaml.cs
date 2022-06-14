@@ -1,5 +1,5 @@
-﻿using CelebrationApp.Services;
-using CelebrationApp.ViewModels;
+﻿using CelebrationCore.Services;
+using CelebrationCore.ViewModels;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
