@@ -57,7 +57,6 @@
                         </i:Interaction.Triggers>
                     </ListView>
                 </Grid>
-                <Button Content="Edit" Width="50" Margin="10"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

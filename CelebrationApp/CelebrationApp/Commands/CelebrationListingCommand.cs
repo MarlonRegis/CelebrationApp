@@ -25,7 +25,7 @@ namespace CelebrationApp.Commands
         {
             try
             {
-                await _mainStore.Load(); 
+                await _mainStore.Load();
                 if (_mainStore.CelebrationEnumerable.Any() == false)
                 {
                     await ModalView.MessageDialogAsync(App.MainRoot, "Error", "Not found celebrations");
@@ -40,8 +40,8 @@ namespace CelebrationApp.Commands
 
         public async void OpenDetailsCelebration(CelebrationRecordViewModel celebration)
         {
-                string ID = Uri.EscapeDataString($"{celebration.Id}");
-                await Launcher.LaunchUriAsync(new System.Uri($"com.celebrationapp://?ID={ID}"));
+            string ID = Uri.EscapeDataString($"{celebration.Id}");
+            await Launcher.LaunchUriAsync(new System.Uri($"com.celebrationapp://?ID={ID}"));
         }
     }
 }

@@ -53,11 +53,7 @@ namespace CelebrationAppWPF.ViewModels
             {               
                CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
                 celebrationList.Add(celebrationRecordViewModel);        
-
             }
-
         }
-
-
     }
 }

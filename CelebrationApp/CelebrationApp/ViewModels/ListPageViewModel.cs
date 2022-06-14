@@ -85,10 +85,10 @@ namespace CelebrationApp.ViewModels
         }
 
         public async void OpenList()
-        {
-            
+        {  
             await Launcher.LaunchUriAsync(new System.Uri("com.celebrationappwpf://"));
         }
+
         public void Close()
         {
             Application.Current.Exit();

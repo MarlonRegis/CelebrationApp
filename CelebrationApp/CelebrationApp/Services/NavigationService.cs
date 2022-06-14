@@ -15,7 +15,10 @@ namespace CelebrationApp.Services
             get { return _frame; }
         }
 
+
         public void SetFrame(Frame frame) => _frame = frame;
+
+        
 
         public void Navigate<TViewModel>(object args = null)
         {
