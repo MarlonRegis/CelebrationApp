@@ -16,6 +16,9 @@
             <Setter Property="Width" Value="600"/>
         </Style>
         <Style TargetType="TextBlock"  x:Key="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="Georgia"/>
             <Setter Property="Margin" Value="0,0,0,5"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
@@ -25,10 +28,13 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="LightGray">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BlueSky.jpg" AlignmentY="Top" AlignmentX="Center" />
+        </Grid.Background>
         <ScrollViewer>
-            <StackPanel  HorizontalAlignment="Center" Margin="0,0,50,0" VerticalAlignment="Stretch">
-                <TextBlock Text="Registration note screen" FontSize="40" Margin="0,10,0,20" FontFamily="Poppins"/>
+            <StackPanel  HorizontalAlignment="Center" Margin="0,20,50,0" VerticalAlignment="Stretch">
+                <TextBlock Text="Registration note screen" FontSize="40" HorizontalAlignment="Center" Foreground="White" FontFamily="Georgia" FontWeight="SemiBold"/>
                 <TextBlock Text="Name:" Style="{StaticResource Label}"/>
                 <TextBox Text="{x:Bind ViewModel.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PlaceholderText="Name"/>
                 <TextBlock Text="Celebration Date:" Style="{StaticResource Label}"/>
@@ -41,34 +47,30 @@
                 <TextBox Text="{x:Bind ViewModel.Description, Mode=TwoWay}" 
                          PlaceholderText="Enter your description..." 
                          TextWrapping="Wrap" Height="200"/>
+                <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Record Date:" Style="{StaticResource Label}"/>
-                <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=OneWay}" />
-
+                    <TextBlock Text="{x:Bind ViewModel.RecordDate, Mode=OneWay}" Style="{StaticResource Label}" Margin="5,2,0,0" />
+                </StackPanel>
                 <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Stretch">
                     <Button Content="Save"
                             Command="{x:Bind ViewModel.SubmitCommand}"
-                            Visibility="{x:Bind ViewModel.SaveClearVisible, Mode=TwoWay}"
-                            Background="LightGreen"
-                            CornerRadius="20"/>
+                            Visibility="{x:Bind ViewModel.SaveClearVisible, Mode=TwoWay}"                            
+                            CornerRadius="10"/>
                     <Button Content="Update"
-                            Visibility="{x:Bind ViewModel.UpdateRemoveVisible, Mode=TwoWay}"
-                            Background="LightGreen"
+                            Visibility="{x:Bind ViewModel.UpdateRemoveVisible, Mode=TwoWay}"                            
                             Command="{x:Bind ViewModel.UpdateCommand}"
-                            CornerRadius="20"/>
+                            CornerRadius="10"/>
                     <Button Content="Clean"
                             Click="{x:Bind ViewModel.Clean}"
-                            Visibility="{x:Bind ViewModel.SaveClearVisible, Mode=TwoWay}"
-                            Background="LightBlue"
-                            CornerRadius="20"/>
-                    <Button Content="Remove"
-                            Background="LightCoral"
+                            Visibility="{x:Bind ViewModel.SaveClearVisible, Mode=TwoWay}"                            
+                            CornerRadius="10"/>
+                    <Button Content="Remove"                            
                             Visibility="{x:Bind ViewModel.UpdateRemoveVisible, Mode=TwoWay}"
                             Command="{x:Bind ViewModel.RemoveCelebration}"
-                            CornerRadius="20"/>
+                            CornerRadius="10"/>
                     <Button Content="Cancel"
-                            Command="{x:Bind ViewModel.CancelCommand}"
-                            Background="LightCoral"
-                            CornerRadius="20"/>
+                            Command="{x:Bind ViewModel.CancelCommand}"                            
+                            CornerRadius="10"/>
                 </StackPanel>
             </StackPanel>
 

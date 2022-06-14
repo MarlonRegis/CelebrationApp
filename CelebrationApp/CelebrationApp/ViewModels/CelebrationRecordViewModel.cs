@@ -33,6 +33,13 @@ namespace CelebrationApp.ViewModels
             set { SetProperty(ref celebrationDate, value); }
         }
 
+        private string celebrationDateView;
+        public string CelebrationDateView
+        {
+            get { return celebrationDateView; }
+            set { SetProperty(ref celebrationDateView, value); }
+        }
+
         private DateTime registerDate;
         public DateTime RegisterDate
         {
@@ -60,9 +67,10 @@ namespace CelebrationApp.ViewModels
             Id = celebration.id;
             Name = celebration.Name;
             CelebrationDate = celebration.CelebrationDate;
+            CelebrationDateView = celebration.CelebrationDate.ToString("MM/dd/yyyy");
             RegisterDate = celebration.RecordDate;
             Description = celebration.Description;
-            Image = "ms-appx:///Assets/Images/Gift.png";
+            Image = "ms-appx:///Assets/Images/Confetti.png";
 
         }
 
