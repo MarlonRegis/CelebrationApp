@@ -48,17 +48,21 @@ namespace CelebrationCore.ViewModels
             celebrationListMonth.Clear();
 
             foreach (Celebration item in list)
-            {                
-                if (item.CelebrationDate.Day == DateTime.Now.Day && item.CelebrationDate.Month == DateTime.Now.Month)
-                {
-                    CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
-                    celebrationListDay.Add(celebrationRecordViewModel);
-                }
-                if (item.CelebrationDate.Month == DateTime.Now.Month)
-                {
-                    CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
-                    celebrationListMonth.Add(celebrationRecordViewModel);
-                }
+            {
+
+                CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
+                celebrationListDay.Add(celebrationRecordViewModel);
+
+                //if (item.CelebrationDate.Day == DateTime.Now.Day && item.CelebrationDate.Month == DateTime.Now.Month)
+                //{
+                //    CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
+                //    celebrationListDay.Add(celebrationRecordViewModel);
+                //}
+                //if (item.CelebrationDate.Month == DateTime.Now.Month)
+                //{
+                //    CelebrationRecordViewModel celebrationRecordViewModel = new CelebrationRecordViewModel(item);
+                //    celebrationListMonth.Add(celebrationRecordViewModel);
+                //}
             }
         }
 

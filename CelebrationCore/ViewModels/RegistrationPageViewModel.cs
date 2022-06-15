@@ -102,10 +102,7 @@ namespace CelebrationCore.ViewModels
 
         public void DateChanged(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)
         {
-            if (datePicker.SelectedDate == null && args.NewDate != null)
-            {
-                CelebrationDate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
-            }
+            CelebrationDate = new DateTime(args.NewDate.Value.Year, args.NewDate.Value.Month, args.NewDate.Value.Day);
         }
 
         public void Clean()
@@ -113,19 +110,19 @@ namespace CelebrationCore.ViewModels
             Name = string.Empty;
             Description = string.Empty;
             RecordDate = DateTime.Now;
-            datePicker.SelectedDate = new DateTime(2022,01,01);
+            datePicker.SelectedDate = new DateTime(2022, 01, 01);
             CelebrationDate = DateTime.Now;
         }
 
         public void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(e.Parameter != null)
+            if (e.Parameter != null)
             {
                 CelebrationRecordViewModel celebrationRecordViewModel = e.Parameter as CelebrationRecordViewModel;
                 if (celebrationRecordViewModel != null)
                     setCelebration(celebrationRecordViewModel);
             }
-            
+
         }
 
         protected void setCelebration(CelebrationRecordViewModel e)
@@ -141,6 +138,6 @@ namespace CelebrationCore.ViewModels
             UpdateRemoveVisible = "Visible";
         }
     }
-    
+
 }
 
