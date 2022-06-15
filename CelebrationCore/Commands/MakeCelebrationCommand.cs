@@ -1,5 +1,6 @@
-﻿using CelebrationCore.Models;
-using CelebrationCore.Services;
+﻿using CelebrationCore.Helpers;
+using CelebrationCore.Interfaces;
+using CelebrationCore.Models;
 using CelebrationCore.Stores;
 using CelebrationCore.ViewModels;
 using System;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace CelebrationCore.Commands
 {
-    public class MakeCelebrationCommand
+    public class MakeCelebrationCommand : IMakeCelebrationCommand
     {
         private readonly MainStore _mainStore;
-        private readonly NavigationService _navigationService;
+        private readonly INavigationService _navigationService;
         private readonly RegistrationPageViewModel _registrationPageViewModel;
 
 
         public MakeCelebrationCommand(RegistrationPageViewModel registrationPageViewModel,
                                       MainStore mainStore,
-                                      NavigationService navigationService)
+                                      INavigationService navigationService)
         {
             _mainStore = mainStore;
             _navigationService = navigationService;

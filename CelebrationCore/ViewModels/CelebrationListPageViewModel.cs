@@ -1,4 +1,5 @@
 ﻿using CelebrationCore.Commands;
+using CelebrationCore.Interfaces;
 using CelebrationCore.Models;
 using CelebrationCore.Services;
 using CelebrationCore.Stores;
@@ -33,7 +34,7 @@ namespace CelebrationAppWPF.ViewModels
         public CelebrationListPageViewModel(MainStore mainStore, NavigationService navigationService) : base(mainStore, navigationService)
         {
             celebrationList = new ObservableCollection<CelebrationRecordViewModel>();
-            CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
+            ICelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
 
             OpenCelebrationCommand = new RelayCommand<CelebrationRecordViewModel>(celebrationListingCommand.OpenDetailsCelebration);
             LoadCelebrationCommandWpf = new AsyncRelayCommand(celebrationListingCommand.LoadCelebration);

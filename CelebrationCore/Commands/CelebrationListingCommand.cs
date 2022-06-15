@@ -1,4 +1,5 @@
-﻿using CelebrationCore.Services;
+﻿using CelebrationCore.Helpers;
+using CelebrationCore.Interfaces;
 using CelebrationCore.Stores;
 using CelebrationCore.ViewModels;
 using NLog;
@@ -6,7 +7,7 @@ using Windows.System;
 
 namespace CelebrationCore.Commands
 {
-    public class CelebrationListingCommand
+    public class CelebrationListingCommand : ICelebrationListingCommand
     {
         private readonly MainStore _mainStore;
         private readonly ListPageViewModel _listPageViewModel;

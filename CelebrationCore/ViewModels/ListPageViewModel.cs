@@ -1,6 +1,6 @@
 ﻿using CelebrationCore.Commands;
+using CelebrationCore.Interfaces;
 using CelebrationCore.Models;
-using CelebrationCore.Services;
 using CelebrationCore.Stores;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -20,23 +20,21 @@ namespace CelebrationCore.ViewModels
         public IEnumerable<CelebrationRecordViewModel> CelebrationListMonth => celebrationListMonth;
         public AsyncRelayCommand LoadCelebrationCommand { get; }
         public RelayCommand MakeCelebrationCommand { get; }
-        public NavigationService _navigationService { get; }
+        public INavigationService _navigationService { get; }
 
-
-
-        public ListPageViewModel(MainStore mainStore, NavigationService navigationService)
+        public ListPageViewModel(MainStore mainStore, INavigationService navigationService)
         {
 
             celebrationListDay = new ObservableCollection<CelebrationRecordViewModel>();
             celebrationListMonth = new ObservableCollection<CelebrationRecordViewModel>();
 
-            CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
+            ICelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
             LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadCelebration);
             MakeCelebrationCommand = new RelayCommand(new NavigateCommand<RegistrationPageViewModel>(navigationService).Navigate);
             _navigationService = navigationService;
         }
 
-        public static ListPageViewModel LoadViewModel(MainStore mainStore, NavigationService navigationService)
+        public static ListPageViewModel LoadViewModel(MainStore mainStore, INavigationService navigationService)
         {
             ListPageViewModel viewModel = new ListPageViewModel(mainStore, navigationService);
             viewModel.LoadCelebrationCommand.Execute(null);

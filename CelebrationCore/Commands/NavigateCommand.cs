@@ -1,4 +1,4 @@
-﻿using CelebrationCore.Services;
+﻿using CelebrationCore.Interfaces;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -10,10 +10,10 @@ namespace CelebrationCore.Commands
 {
     public class NavigateCommand<TViewModel> where TViewModel : ObservableObject
     {
-        private readonly NavigationService _navigationService;
+        private readonly INavigationService _navigationService;
         private readonly object _args;
 
-        public NavigateCommand(NavigationService navigationService, object args = null)
+        public NavigateCommand(INavigationService navigationService, object args = null)
         {
             if (navigationService != null)
             {

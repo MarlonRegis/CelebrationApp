@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationCore.Services
+namespace CelebrationCore.Helpers
 {
     public static class ModalView
     {
@@ -14,7 +14,7 @@ namespace CelebrationCore.Services
         {
             if (element != null)
             {
-                await MessageDialogAsync(element, title, message, "OK");
+                await element.MessageDialogAsync(title, message, "OK");
             }
         }
 
@@ -51,7 +51,7 @@ namespace CelebrationCore.Services
                 return null;
             }
 
-            return (result == ContentDialogResult.Primary);
+            return result == ContentDialogResult.Primary;
         }
 
 

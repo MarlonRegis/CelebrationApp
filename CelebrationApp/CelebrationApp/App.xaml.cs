@@ -13,6 +13,7 @@ using Windows.ApplicationModel.Activation;
 using CelebrationCore;
 using CelebrationCore.Models;
 using CelebrationCore.Stores;
+using CelebrationCore.Interfaces;
 
 namespace CelebrationApp
 {
@@ -75,7 +76,7 @@ namespace CelebrationApp
             var celebration = Ioc.Default.GetRequiredService<CelebrationService>().GetCelebrationByID(Guid.Parse((string)celebrationId));
             var celebrationRecordViewModel = new CelebrationRecordViewModel(celebration);
 
-            Ioc.Default.GetRequiredService<NavigationService>().Navigate<RegistrationPageViewModel>(celebrationRecordViewModel);
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<RegistrationPageViewModel>(celebrationRecordViewModel);
         }
 
         private Frame CreateRootFrame()
@@ -86,7 +87,7 @@ namespace CelebrationApp
             {
                 rootFrame = new Frame();
                 m_window.Content = rootFrame;
-                Ioc.Default.GetRequiredService<NavigationService>().SetFrame(rootFrame);
+                Ioc.Default.GetRequiredService<INavigationService>().SetFrame(rootFrame);
             }
 
             return rootFrame;

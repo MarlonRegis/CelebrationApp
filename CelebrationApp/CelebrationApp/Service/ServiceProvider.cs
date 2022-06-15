@@ -2,6 +2,7 @@
 using CelebrationApp;
 using CelebrationApp.Views;
 using CelebrationCore.Commons;
+using CelebrationCore.Interfaces;
 using CelebrationCore.Models;
 using CelebrationCore.Stores;
 using CelebrationCore.ViewModels;
@@ -20,7 +21,7 @@ namespace CelebrationCore.Services
         private static CelebrationDbContextFactory _dbContextFactory;
         private static readonly string CONNECTION_STRTING = $"Data Source={GlobalVariables.DataBaseString}";
         private static ServiceCollection _servicesProvider = new ServiceCollection();
-        private static NavigationService _navigationService;
+        private static INavigationService _navigationService;
         private static Logger _logger;
 
         public static void CreateDefaultServices()
@@ -53,7 +54,7 @@ namespace CelebrationCore.Services
             _navigationService.Configure(typeof(ListPageViewModel), typeof(ListPage));
             _navigationService.Configure(typeof(RegistrationPageViewModel), typeof(RegistrationPage));
 
-            _servicesProvider.AddSingleton<NavigationService>(_navigationService);
+            _servicesProvider.AddSingleton<INavigationService>(_navigationService);
 
         }
         private static void AddModels()
@@ -70,8 +71,8 @@ namespace CelebrationCore.Services
 
         private static void AddViewModels()
         {
-            _servicesProvider.AddTransient((s) => new RegistrationPageViewModel(s.GetRequiredService<MainStore>(), s.GetRequiredService<NavigationService>()));
-            _servicesProvider.AddTransient((s) => ListPageViewModel.LoadViewModel(s.GetRequiredService<MainStore>(), s.GetRequiredService<NavigationService>()));
+            _servicesProvider.AddTransient((s) => new RegistrationPageViewModel(s.GetRequiredService<MainStore>(), s.GetRequiredService<INavigationService>()));
+            _servicesProvider.AddTransient((s) => ListPageViewModel.LoadViewModel(s.GetRequiredService<MainStore>(), s.GetRequiredService<INavigationService>()));
         }
 
     }

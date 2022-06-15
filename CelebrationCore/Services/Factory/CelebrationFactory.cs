@@ -1,4 +1,5 @@
-﻿using CelebrationCore.Models;
+﻿using CelebrationCore.Interfaces;
+using CelebrationCore.Models;
 using Repository.DTOs;
 using System;
 using System.Collections.Generic;
@@ -8,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace CelebrationCore.Services.Factory
 {
-    public class CelebrationFactory
+    public class CelebrationFactory : ICelebrationFactory
     {
         public Celebration createCelebration(string name, string description, DateTime recordDate, DateTime celebrationDate)
         {
-            Celebration celebration = new Celebration( name, description, recordDate, celebrationDate);
+            Celebration celebration = new Celebration(name, description, recordDate, celebrationDate);
             return celebration;
         }
 
 
         public Celebration ToCelebration(CelebrationDTO res)
         {
-            return new Celebration( res.Name, res.Description, res.RecordDate, res.CelebrationDate, res.Id);
+            return new Celebration(res.Name, res.Description, res.RecordDate, res.CelebrationDate, res.Id);
         }
 
         public CelebrationDTO ToCelebrationDTO(Celebration celebration)

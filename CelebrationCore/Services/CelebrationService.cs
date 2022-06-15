@@ -1,4 +1,5 @@
-﻿using CelebrationCore.Models;
+﻿using CelebrationCore.Interfaces;
+using CelebrationCore.Models;
 using CelebrationCore.Services.Factory;
 using Repository;
 using Repository.DTOs;
@@ -11,7 +12,7 @@ namespace CelebrationCore.Services
 {
     public class CelebrationService : ICelebrationService
     {
-        private readonly CelebrationFactory _celebrationFactory;
+        private readonly ICelebrationFactory _celebrationFactory;
         private readonly CelebrationRepository _celebrationRepository;
 
 

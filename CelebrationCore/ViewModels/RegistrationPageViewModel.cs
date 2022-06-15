@@ -1,5 +1,5 @@
 ﻿using CelebrationCore.Commands;
-using CelebrationCore.Services;
+using CelebrationCore.Interfaces;
 using CelebrationCore.Stores;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -72,16 +72,16 @@ namespace CelebrationCore.ViewModels
         }
 
         private readonly MainStore _mainStore;
-        private readonly NavigationService _navigationService;
+        private readonly INavigationService _navigationService;
         public AsyncRelayCommand SubmitCommand { get; }
         public AsyncRelayCommand UpdateCommand { get; }
         public AsyncRelayCommand RemoveCelebration { get; }
         public RelayCommand CancelCommand { get; }
 
-        public RegistrationPageViewModel(MainStore mainStore, NavigationService navigationService)
+        public RegistrationPageViewModel(MainStore mainStore, INavigationService navigationService)
         {
             DateControl();
-            MakeCelebrationCommand makeCelebrationCommand = new MakeCelebrationCommand(this, mainStore, navigationService);
+            IMakeCelebrationCommand makeCelebrationCommand = new MakeCelebrationCommand(this, mainStore, navigationService);
 
             SubmitCommand = new AsyncRelayCommand(makeCelebrationCommand.SaveCelebration, makeCelebrationCommand.CanExecute);
             UpdateCommand = new AsyncRelayCommand(makeCelebrationCommand.UpdateCelebration, makeCelebrationCommand.CanExecute);

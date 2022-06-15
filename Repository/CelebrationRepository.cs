@@ -18,7 +18,6 @@ namespace Repository
         {
             _logger = NLog.LogManager.GetLogger("logfile");
             _logger.Info("Constructor CelebrationsRepository");
-
         }
 
         public IEnumerable<CelebrationDTO> GetAll(int componentLimit)

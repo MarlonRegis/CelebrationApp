@@ -71,7 +71,6 @@ namespace CelebrationCore.ViewModels
             RegisterDate = celebration.RecordDate;
             Description = celebration.Description;
             Image = "ms-appx:///../CelebrationCore/Assets/Images/Confetti.png";
-
         }
 
 

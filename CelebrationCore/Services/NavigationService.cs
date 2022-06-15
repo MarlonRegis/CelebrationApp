@@ -1,10 +1,11 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using CelebrationCore.Interfaces;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 
 namespace CelebrationCore.Services
 {
-    public class NavigationService
+    public class NavigationService : INavigationService
     {
 
         private static readonly Dictionary<Type, Type> _viewMapping = new Dictionary<Type, Type>();
@@ -18,11 +19,12 @@ namespace CelebrationCore.Services
 
         public void SetFrame(Frame frame) => _frame = frame;
 
-        
+
 
         public void Navigate<TViewModel>(object args = null)
         {
-            if (_viewMapping.ContainsKey(typeof(TViewModel))){
+            if (_viewMapping.ContainsKey(typeof(TViewModel)))
+            {
                 Frame.Navigate(_viewMapping[typeof(TViewModel)], args);
             }
             else
