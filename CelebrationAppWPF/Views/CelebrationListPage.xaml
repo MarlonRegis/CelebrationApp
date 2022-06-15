@@ -40,8 +40,6 @@ Title="CelebrationListPage">
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
 
-
-
                             <GridViewColumn Header="Name">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -49,8 +47,6 @@ Title="CelebrationListPage">
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-
 
                             <GridViewColumn Header="Celebration Date">
                                 <GridViewColumn.CellTemplate>
@@ -60,8 +56,6 @@ Title="CelebrationListPage">
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-
-
                             <GridViewColumn Header="Record Date">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -69,8 +63,6 @@ Title="CelebrationListPage">
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-
 
                             <GridViewColumn Header="Description" Width="99">
                                 <GridViewColumn.CellTemplate>
