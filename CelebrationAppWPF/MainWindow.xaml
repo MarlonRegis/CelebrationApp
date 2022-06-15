@@ -6,6 +6,6 @@
         xmlns:local="clr-namespace:CelebrationAppWPF" 
         xmlns:views="clr-namespace:CelebrationAppWPF.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Celebration List" Height="450" Width="800">
     <views:CelebrationListPage/>
 </Window>
