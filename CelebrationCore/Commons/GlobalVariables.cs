@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Commons
+namespace CelebrationCore.Commons
 {
     public class GlobalVariables
     {
 
-        public const string DataBaseString = "c:/Sidi/study/FinalProject/CelebrationApp/Repository/celebration.db";
+        public const string DataBaseString = "C:/Sidi/study/FinalProject/CelebrationApp/Repository/celebration.db";
     }
 }

@@ -1,8 +1,8 @@
-﻿using CelebrationApp.Commands;
-using CelebrationApp.Models;
-using CelebrationApp.Services;
-using CelebrationApp.Stores;
-using CelebrationApp.ViewModels;
+﻿using CelebrationCore.Commands;
+using CelebrationCore.Models;
+using CelebrationCore.Services;
+using CelebrationCore.Stores;
+using CelebrationCore.ViewModels;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,8 @@ namespace CelebrationAppWPF.ViewModels
         private readonly ObservableCollection<CelebrationRecordViewModel> celebrationList;
         public IEnumerable<CelebrationRecordViewModel> CelebrationList => celebrationList;
 
-        public AsyncRelayCommand LoadCelebrationCommand { get; }        
+        public AsyncRelayCommand LoadCelebrationCommandWpf { get; }      
+        
         public RelayCommand<CelebrationRecordViewModel> OpenCelebrationCommand { get; }        
 
 
@@ -35,10 +36,10 @@ namespace CelebrationAppWPF.ViewModels
             CelebrationListingCommand celebrationListingCommand = new CelebrationListingCommand(mainStore, this);
 
             OpenCelebrationCommand = new RelayCommand<CelebrationRecordViewModel>(celebrationListingCommand.OpenDetailsCelebration);
-            LoadCelebrationCommand = new AsyncRelayCommand(celebrationListingCommand.LoadComponents);
+            LoadCelebrationCommandWpf = new AsyncRelayCommand(celebrationListingCommand.LoadCelebration);
         }
 
-        public static CelebrationListPageViewModel LoadViewModel(MainStore mainStore, NavigationService navigationService)
+        public static  CelebrationListPageViewModel LoadViewModelWpf(MainStore mainStore, NavigationService navigationService)
         {
             CelebrationListPageViewModel viewModel = new CelebrationListPageViewModel(mainStore, navigationService);
             viewModel.LoadCelebrationCommand.Execute(null);

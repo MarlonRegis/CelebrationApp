@@ -1,4 +1,4 @@
-﻿using CelebrationApp.ViewModels;
+﻿using CelebrationCore.ViewModels;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;

@@ -1,7 +1,7 @@
-﻿using CelebrationApp.Commons;
-using CelebrationApp.Models;
-using CelebrationApp.Services;
-using CelebrationApp.Stores;
+﻿using CelebrationCore.Commons;
+using CelebrationCore.Models;
+using CelebrationCore.Services;
+using CelebrationCore.Stores;
 using CelebrationAppWPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml;
 
 namespace CelebrationAppWPF.Services
 {
@@ -39,7 +40,7 @@ namespace CelebrationAppWPF.Services
 
         private static void AddRepository()
         {
-            CelebrationDbContext context = _dbContextFactory.CreateDbContext();
+            CelebrationDbContext context = _dbContextFactory?.CreateDbContext();
 
             _servicesProvider.AddSingleton(new CelebrationRepository(context));
         }
@@ -64,7 +65,7 @@ namespace CelebrationAppWPF.Services
         private static void AddViewModels()
         {
 
-            _servicesProvider.AddSingleton((s) =>  CelebrationListPageViewModel.LoadViewModel(s.GetRequiredService<MainStore>(), null));
+            _servicesProvider.AddSingleton((s) =>  CelebrationListPageViewModel.LoadViewModelWpf(s.GetRequiredService<MainStore>(), null));
         }
 
     }

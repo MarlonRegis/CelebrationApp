@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Models
+namespace CelebrationCore.Models
 {
     public class Main
     {

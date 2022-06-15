@@ -1,4 +1,4 @@
-﻿using CelebrationApp.Models;
+﻿using CelebrationCore.Models;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.ViewModels
+namespace CelebrationCore.ViewModels
 {
     public class CelebrationRecordViewModel : ObservableObject
     {
@@ -64,7 +64,7 @@ namespace CelebrationApp.ViewModels
 
         public CelebrationRecordViewModel(Celebration celebration)
         {
-            Id = celebration.id;
+            Id = celebration.Id;
             Name = celebration.Name;
             CelebrationDate = celebration.CelebrationDate;
             CelebrationDateView = celebration.CelebrationDate.ToString("MM/dd/yyyy");

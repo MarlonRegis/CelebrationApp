@@ -1,5 +1,5 @@
-﻿using CelebrationApp.Services;
-using CelebrationApp.ViewModels;
+﻿using CelebrationCore.Services;
+using CelebrationCore.ViewModels;
 using CelebrationApp.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
@@ -10,6 +10,9 @@ using System;
 using System.Threading.Tasks;
 using System.Web;
 using Windows.ApplicationModel.Activation;
+using CelebrationCore;
+using CelebrationCore.Models;
+using CelebrationCore.Stores;
 
 namespace CelebrationApp
 {
@@ -23,6 +26,7 @@ namespace CelebrationApp
             this.InitializeComponent();
 
             CelebrationServiceProvider.CreateDefaultServices();
+
         }
 
         protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
@@ -33,7 +37,7 @@ namespace CelebrationApp
             ExtendedActivationKind kind = argsActivated.Kind;
 
             Microsoft.Windows.AppLifecycle.AppInstance keyInstance =
-                Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("SampleMainRegister");
+                Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("CelebrationAppRegister");
 
             m_window = new MainWindow();
 
@@ -49,8 +53,10 @@ namespace CelebrationApp
 
 
             m_window.Activate();
-            MainRoot = m_window.Content as FrameworkElement;
 
+            MainRoot = m_window.Content as FrameworkElement;
+            MainStore mainStore = Ioc.Default.GetRequiredService<MainStore>();
+            mainStore.MainRoot = MainRoot;
 
         }
 

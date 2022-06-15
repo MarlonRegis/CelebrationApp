@@ -1,11 +1,12 @@
-﻿using CelebrationApp.Models;
-using CelebrationApp.Services;
-using CelebrationApp.Stores;
-using CelebrationApp.ViewModels;
+﻿using CelebrationCore.Models;
+using CelebrationCore.Services;
+using CelebrationCore.Stores;
+using CelebrationCore.ViewModels;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace CelebrationApp.Commands
+namespace CelebrationCore.Commands
 {
     public class MakeCelebrationCommand
     {
@@ -14,7 +15,7 @@ namespace CelebrationApp.Commands
         private readonly RegistrationPageViewModel _registrationPageViewModel;
 
 
-        public MakeCelebrationCommand(RegistrationPageViewModel registrationPageViewModel, 
+        public MakeCelebrationCommand(RegistrationPageViewModel registrationPageViewModel,
                                       MainStore mainStore,
                                       NavigationService navigationService)
         {
@@ -22,25 +23,27 @@ namespace CelebrationApp.Commands
             _navigationService = navigationService;
             _registrationPageViewModel = registrationPageViewModel;
 
-
-
             _registrationPageViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         public bool CanExecute()
         {
             return !string.IsNullOrEmpty(_registrationPageViewModel.Name)
-                && !string.IsNullOrEmpty( _registrationPageViewModel.CelebrationDate.ToString())
+                && !string.IsNullOrEmpty(_registrationPageViewModel.CelebrationDate.ToString())
                 && CanExecuteCommand();
         }
 
-        private void OnViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_registrationPageViewModel.Name) ||
-                e.PropertyName == nameof(_registrationPageViewModel.CelebrationDate))
+            if (e != null)
             {
-                _registrationPageViewModel.SubmitCommand.NotifyCanExecuteChanged();
+                if (e.PropertyName == nameof(_registrationPageViewModel.Name) ||
+                e.PropertyName == nameof(_registrationPageViewModel.CelebrationDate))
+                {
+                    _registrationPageViewModel.SubmitCommand.NotifyCanExecuteChanged();
+                }
             }
+
         }
 
         public async Task SaveCelebration()
@@ -56,13 +59,13 @@ namespace CelebrationApp.Commands
             {
                 await _mainStore.SaveCelebration(celebration);
 
-                await ModalView.MessageDialogAsync(App.MainRoot, "Sucessfully", "Created a Celebration");
+                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Sucessfully", "Created a Celebration");
 
                 _navigationService.Navigate<ListPageViewModel>();
             }
             catch (Exception e)
             {
-                await ModalView.MessageDialogAsync(App.MainRoot, "Error", "Error when creating celebration: " + e.Message.ToString());
+                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Error", "Error when creating celebration: " + e.Message.ToString());
             }
         }
 
@@ -76,14 +79,14 @@ namespace CelebrationApp.Commands
             try
             {
                 await _mainStore.RemoveCelebration(_registrationPageViewModel.ID);
-                await ModalView.MessageDialogAsync(App.MainRoot, "Sucessfully", "Deleted a Celebration");
+                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Sucessfully", "Deleted a Celebration");
 
                 _navigationService.Navigate<ListPageViewModel>();
 
             }
             catch (Exception)
             {
-                await ModalView.MessageDialogAsync(App.MainRoot, "Error", "Unable to delete record");
+                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Error", "Unable to delete record");
             }
         }
 
@@ -100,14 +103,14 @@ namespace CelebrationApp.Commands
                 );
 
                 await _mainStore.UpdateCelebration(celebration);
-                await ModalView.MessageDialogAsync(App.MainRoot, "Sucessfully", "Updated a Celebration");
+                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Sucessfully", "Updated a Celebration");
 
                 _navigationService.Navigate<ListPageViewModel>();
 
             }
             catch (Exception)
             {
-                await ModalView.MessageDialogAsync(App.MainRoot, "Error", "It's not possible to update celebration");
+                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Error", "It's not possible to update celebration");
             }
         }
     }

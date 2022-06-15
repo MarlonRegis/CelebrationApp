@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CelebrationApp.Services
+namespace CelebrationCore.Services
 {
     public class NavigationService
     {
