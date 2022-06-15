@@ -22,7 +22,8 @@ namespace Repository
 
         public IEnumerable<CelebrationDTO> GetAll(int componentLimit)
         {
-            _logger.Info("Started process to GetAll Celebrations");
+            _context = new CelebrationDbContext(_context._options);
+
             var query = _context.Set<CelebrationDTO>();
 
             if (query.Any())

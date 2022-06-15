@@ -15,7 +15,7 @@ namespace Repository.Repository.Base
 
         private readonly Logger _logger;
 
-        protected readonly CelebrationDbContext _context;
+        public CelebrationDbContext _context;
 
         public BaseRepository(CelebrationDbContext context)
         {
