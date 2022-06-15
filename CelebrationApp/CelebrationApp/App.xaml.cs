@@ -1,49 +1,96 @@
-﻿using Microsoft.UI.Xaml;
+﻿using CelebrationCore.Services;
+using CelebrationCore.ViewModels;
+using CelebrationApp.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
+using Microsoft.Windows.AppLifecycle;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
+using System.Threading.Tasks;
+using System.Web;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using CelebrationCore;
+using CelebrationCore.Models;
+using CelebrationCore.Stores;
+using CelebrationCore.Interfaces;
 
 namespace CelebrationApp
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
+
     public partial class App : Application
     {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
+        public static FrameworkElement MainRoot { get; private set; }
+
         public App()
         {
             this.InitializeComponent();
+
+            CelebrationServiceProvider.CreateDefaultServices();
+
         }
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            AppActivationArguments argsActivated =
+                Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
+
+            ExtendedActivationKind kind = argsActivated.Kind;
+
+            Microsoft.Windows.AppLifecycle.AppInstance keyInstance =
+                Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("CelebrationAppRegister");
+
             m_window = new MainWindow();
+
+            Frame rootFrame = CreateRootFrame();
+
+            if (rootFrame.Content == null)
+            {
+                rootFrame.Navigate(typeof(ListPage), args.Arguments);
+            }
+
+            if (kind == ExtendedActivationKind.Protocol)
+                await NavigateToComponent(argsActivated, keyInstance);
+
+
             m_window.Activate();
+
+            MainRoot = m_window.Content as FrameworkElement;
+            MainStore mainStore = Ioc.Default.GetRequiredService<MainStore>();
+            mainStore.MainRoot = MainRoot;
+
+        }
+
+        private static async Task NavigateToComponent(AppActivationArguments argsActivated, Microsoft.Windows.AppLifecycle.AppInstance keyInstance)
+        {
+            await keyInstance.RedirectActivationToAsync(argsActivated);
+
+            object celebrationId = null;
+
+            if (argsActivated.Data is IProtocolActivatedEventArgs protocolArgs)
+            {
+                celebrationId = HttpUtility.ParseQueryString(protocolArgs.Uri.Query).Get("ID");
+            }
+            celebrationId = celebrationId.ToString().Replace("\"", "");
+
+            var celebration = Ioc.Default.GetRequiredService<CelebrationService>().GetCelebrationByID(Guid.Parse((string)celebrationId));
+            var celebrationRecordViewModel = new CelebrationRecordViewModel(celebration);
+
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<RegistrationPageViewModel>(celebrationRecordViewModel);
+        }
+
+        private Frame CreateRootFrame()
+        {
+            Frame rootFrame = m_window.Content as Frame;
+
+            if (rootFrame == null)
+            {
+                rootFrame = new Frame();
+                m_window.Content = rootFrame;
+                Ioc.Default.GetRequiredService<INavigationService>().SetFrame(rootFrame);
+            }
+
+            return rootFrame;
         }
 
         private Window m_window;
