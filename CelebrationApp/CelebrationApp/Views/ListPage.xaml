@@ -61,7 +61,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BlueSky.jpg" AlignmentY="Top" AlignmentX="Center" />
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///../CelebrationCore/Assets/Images/BlueSky.jpg" AlignmentY="Top" AlignmentX="Center" />
         </Grid.Background>
         <ScrollViewer>
             <StackPanel>

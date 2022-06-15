@@ -70,7 +70,7 @@ namespace CelebrationCore.ViewModels
             CelebrationDateView = celebration.CelebrationDate.ToString("MM/dd/yyyy");
             RegisterDate = celebration.RecordDate;
             Description = celebration.Description;
-            Image = "ms-appx:///Assets/Images/Confetti.png";
+            Image = "ms-appx:///../CelebrationCore/Assets/Images/Confetti.png";
 
         }
 
