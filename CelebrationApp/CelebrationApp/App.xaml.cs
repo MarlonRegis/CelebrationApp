@@ -14,6 +14,8 @@ using CelebrationCore;
 using CelebrationCore.Models;
 using CelebrationCore.Stores;
 using CelebrationCore.Interfaces;
+using Microsoft.Extensions.Logging;
+using CelebrationApp.Service;
 
 namespace CelebrationApp
 {
@@ -21,17 +23,21 @@ namespace CelebrationApp
     public partial class App : Application
     {
         public static FrameworkElement MainRoot { get; private set; }
+       // public ILogger _logger;
 
-        public App()
+        public App()    
         {
             this.InitializeComponent();
 
             CelebrationServiceProvider.CreateDefaultServices();
+            //_logger = Ioc.Default.GetRequiredService<ILoggerFactory>().CreateLogger<App>();
 
+            //Serilog.Log.Debug("============== Start application ============== ");
         }
 
         protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            
             AppActivationArguments argsActivated =
                 Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
 
@@ -41,6 +47,8 @@ namespace CelebrationApp
                 Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("CelebrationAppRegister");
 
             m_window = new MainWindow();
+
+            //Serilog.Log.Debug("============== Start application ============== ");
 
             Frame rootFrame = CreateRootFrame();
 

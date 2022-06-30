@@ -2,7 +2,7 @@
 using CelebrationCore.Models;
 using CelebrationCore.Services.Factory;
 using Repository;
-using Repository.DTOs;
+using Repository.Repository.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
