@@ -124,6 +124,4 @@ jobs:
         # The name of the dev branch
         dev-branch:  develop
         # The prefix to use in the version
-        prefix: optional
-		    # The paths to be used to calculate changes (comma-separated)
     
