@@ -11,7 +11,7 @@ namespace Commons
 
         public const string DataBaseString = "C:/Sidi/study/FinalProject/CelebrationApp/Repository/celebration.db";
         public const string FolderLogString = "C:/Sidi/study/FinalProject/CelebrationApp/Repository/celebration.db";
-        public const string testeGitVersion = "C:/Sidi/study/FinalProject/CelebrationApp/Repository/celebration.db";
+        public const string testeGitVersion = "/Repository/celebration.db";
     }
 }
 
