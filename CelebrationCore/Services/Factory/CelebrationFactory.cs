@@ -1,6 +1,6 @@
 ﻿using CelebrationCore.Interfaces;
 using CelebrationCore.Models;
-using Repository.DTOs;
+using Repository.Repository.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

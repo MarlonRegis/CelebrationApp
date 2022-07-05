@@ -2,11 +2,9 @@
 using CelebrationCore.Models;
 using CelebrationCore.Services;
 using CelebrationCore.Stores;
-using CelebrationAppWPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Repository;
-using Repository.DbContexts;
 using Repository.Repository.DbContexts;
 using System;
 using System.Collections.Generic;
@@ -14,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
+using CelebrationCore.ViewModels;
 
 namespace CelebrationAppWPF.Services
 {

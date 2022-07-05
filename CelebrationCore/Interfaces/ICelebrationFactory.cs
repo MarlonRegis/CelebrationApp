@@ -1,5 +1,5 @@
 ﻿using CelebrationCore.Models;
-using Repository.DTOs;
+using Repository.Repository.DTOs;
 
 namespace CelebrationCore.Interfaces
 {

@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="nlog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\Commons\Commons.csproj" />
   </ItemGroup>
 </Project>

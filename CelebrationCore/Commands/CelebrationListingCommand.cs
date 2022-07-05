@@ -31,9 +31,9 @@ namespace CelebrationCore.Commands
                 }
                 _listPageViewModel.UpdateList(_mainStore.CelebrationEnumerable);
             }
-            catch
+            catch(Exception e)
             {
-                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Error", "Error");
+                await ModalView.MessageDialogAsync(_mainStore.MainRoot, "Error", "Error is: " + e.Message);
             }
         }
 
