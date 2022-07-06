@@ -55,8 +55,8 @@ jobs:
     runs-on: windows-latest 
 
     env:
-      Solution_Name: CelebrationApp.sln
-      Project_Directory: CelebrationApp
+      Solution_Name: WinUI3FinalProject.sln
+      Project_Directory: WinUI3FinalProject
   
     steps:
     - name: Checkout
@@ -88,21 +88,7 @@ jobs:
         Appx_Bundle_Platforms: x64
         Appx_Package_Dir: AppPackages
         Configuration: ${{ matrix.configuration }}
-
-  job4:
-    name: GitVersion (Generates the version of the repository)
-    needs: [job1, job2, job3]
-    runs-on: ubuntu-latest
-    
-    steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.ACCESS_TOKEN }}
-        submodules: true
-        fetch-depth: 0
-        
+           
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.7
       with:
@@ -143,10 +129,18 @@ jobs:
         echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
       
-     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: CelebrationApp MSIX Package
-        path: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
+        name: WinUI3FinalProject MSIX Packages-${{ steps.gitversion.outputs.fullSemVer }}
+        path: 'SampleDesktopBridge\SampleDesktopBridge (Package)\AppPackages'
+        
+    - name: Upload server binaries to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.ACCESS_TOKEN }}
+        file: 'SampleDesktopBridge\SampleDesktopBridge (Package)\AppPackages'
+        asset_name: WinUI3FinalProject MSIX Packages
         tag: "${{ steps.gitversion.outputs.fullSemVer }}"
+        overwrite: true
