@@ -89,6 +89,12 @@ jobs:
         Appx_Package_Dir: AppPackages
         Configuration: ${{ matrix.configuration }}
 
+  job4:
+    name: GitVersion (Generates the version of the repository)
+    needs: [job1, job2, job3]
+    runs-on: ubuntu-latest
+    
+    steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
@@ -105,7 +111,7 @@ jobs:
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
       uses: gittools/actions/gitversion/execute@v0.9.7
-      run: |
+    - run: |
         echo "Major: ${{ steps.gitversion.outputs.major }}"
         echo "Minor: ${{ steps.gitversion.outputs.minor }}"
         echo "Patch: ${{ steps.gitversion.outputs.patch }}"
@@ -138,12 +144,9 @@ jobs:
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
       
      # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
-    
-    - name: Upload server binaries to release
-      uses: svenstaro/upload-release-action@v1-release
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
       with:
-        repo_token: ${{ secrets.ACCESS_TOKEN }}
-        file: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
-        asset_name: CelebrationApp MSIX Package
+        name: CelebrationApp MSIX Package
+        path: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
         tag: "${{ steps.gitversion.outputs.fullSemVer }}"
-        overwrite: true
