@@ -1,0 +1,141 @@
+name: Github Actions with Github SubModules or Subtree or Github Packages with Nugets and GitVersion plus Multi-pipeline
+ 
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+ 
+jobs:
+  job1:
+    name: 'Submodules Update'
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.ACCESS_TOKEN }}
+        submodules: true
+
+    # Update references
+    - name: Git Sumbodule Update
+      run: |
+        git pull --recurse-submodules
+        git submodule update --remote --recursive
+
+    - name: Commit update
+      run: |
+        git config --global user.name 'Git Samsung Settings'
+        git config --global user.email 'bot@noreply.github.com'
+        git config --global url."git@github.com:".insteadOf "https://github.com/"
+        git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}
+        git commit -am "Auto updated submodule references" && git push || echo "No changes to commit"
+  job2:
+    name: Unit and Integration Tests (these jobs is supposed to run the tests of application)
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+    - name: Unit and Integration Tests
+      uses: actions/checkout@v2
+  job3:
+    name: Create the app Package and Upload build artifacts
+    needs: [job1, job2]
+    
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: windows-latest 
+
+    env:
+      Solution_Name: CelebrationApp.sln
+      Project_Directory: CelebrationApp
+  
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+
+        # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+        - name: Setup MSBuild.exe
+          uses: microsoft/setup-msbuild@v1.0.3
+          
+        # Restore the application to populate the obj folder with RuntimeIdentifiers
+        - name: Restore the application
+          run: msbuild $env:Solution_Name /m /r /nr:false /t:Clean /p:Configuration=$env:Configuration
+          env:
+            Configuration: ${{ matrix.configuration }}
+
+        # Create the app package by building and packaging the Windows Application Packaging project
+        - name: Create the app package
+          run: msbuild $env:Solution_Name /m /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:AppxPackageDir=$env:Appx_Package_Dir /p:AppxBundle=$env:Appx_Bundle /p:AppxPackageIsForStore=True /p:UapAppxPackageBuildMode=StoreUpload
+          env:
+            Appx_Bundle: Always
+            Appx_Bundle_Platforms: x64
+            Appx_Package_Dir: AppPackages
+        Configuration: ${{ matrix.configuration }}
+
+  job4:
+    name: GitVersion (Generates the version of the repository)
+    needs: [job1, job2, job3]
+    runs-on: windows-latest
+    steps:
+    - name: Install GitVersion
+      run: dotnet tool restore
+    
+    - name: Use GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9
+    - run: |
+        echo "Major: ${{ steps.gitversion.outputs.major }}"
+        echo "Minor: ${{ steps.gitversion.outputs.minor }}"
+        echo "Patch: ${{ steps.gitversion.outputs.patch }}"
+        echo "PreReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}"
+        echo "PreReleaseTagWithDash: ${{ steps.gitversion.outputs.preReleaseTagWithDash }}"
+        echo "PreReleaseLabel: ${{ steps.gitversion.outputs.preReleaseLabel }}"
+        echo "PreReleaseNumber: ${{ steps.gitversion.outputs.preReleaseNumber }}"
+        echo "WeightedPreReleaseNumber: ${{ steps.gitversion.outputs.weightedPreReleaseNumber }}"
+        echo "BuildMetaData: ${{ steps.gitversion.outputs.buildMetaData }}"
+        echo "BuildMetaDataPadded: ${{ steps.gitversion.outputs.buildMetaDataPadded }}"
+        echo "FullBuildMetaData: ${{ steps.gitversion.outputs.fullBuildMetaData }}"
+        echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
+        echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+        echo "LegacySemVer: ${{ steps.gitversion.outputs.legacySemVer }}"
+        echo "LegacySemVerPadded: ${{ steps.gitversion.outputs.legacySemVerPadded }}"
+        echo "AssemblySemVer: ${{ steps.gitversion.outputs.assemblySemVer }}"
+        echo "AssemblySemFileVer: ${{ steps.gitversion.outputs.assemblySemFileVer }}"
+        echo "FullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}"
+        echo "InformationalVersion: ${{ steps.gitversion.outputs.informationalVersion }}"
+        echo "BranchName: ${{ steps.gitversion.outputs.branchName }}"
+        echo "Sha: ${{ steps.gitversion.outputs.sha }}"
+        echo "ShortSha: ${{ steps.gitversion.outputs.shortSha }}"
+        echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
+        echo "NuGetVersion: ${{ steps.gitversion.outputs.nuGetVersion }}"
+        echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.nuGetPreReleaseTagV2 }}"
+        echo "NuGetPreReleaseTag: ${{ steps.gitversion.outputs.nuGetPreReleaseTag }}"
+        echo "VersionSourceSha: ${{ steps.gitversion.outputs.versionSourceSha }}"
+        echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.commitsSinceVersionSource }}"
+        echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
+        echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
+      
+     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: CelebrationApp MSIX Package
+        path: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
+        tag: "${{ steps.gitversion.outputs.fullSemVer }}"
