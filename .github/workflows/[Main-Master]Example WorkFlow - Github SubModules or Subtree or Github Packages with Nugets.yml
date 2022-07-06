@@ -94,8 +94,6 @@ jobs:
     needs: [job1, job2, job3]
     runs-on: windows-latest
     steps:
-    - name: Install GitVersion
-      run: dotnet tool restore
     
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
