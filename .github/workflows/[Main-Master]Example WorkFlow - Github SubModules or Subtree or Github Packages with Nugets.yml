@@ -143,7 +143,7 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.ACCESS_TOKEN }}
-        file: 'CelebrationApp\CelebrationApp (Package)'
+        file: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
         asset_name: CelebrationApp MSIX Package
         tag: "${{ steps.gitversion.outputs.fullSemVer }}"
         overwrite: true
