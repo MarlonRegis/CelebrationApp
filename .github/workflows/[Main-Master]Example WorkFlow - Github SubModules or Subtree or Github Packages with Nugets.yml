@@ -144,5 +144,5 @@ jobs:
         repo_token: ${{ secrets.ACCESS_TOKEN }}
         file: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
         asset_name: CelebrationApp MSIX Packages
-        tag: "Celebration - ${{ steps.gitversion.outputs.semVer }}"
+        tag: "Celebration-${{ steps.gitversion.outputs.semVer }}"
         overwrite: true
