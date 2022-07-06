@@ -55,8 +55,8 @@ jobs:
     runs-on: windows-latest 
 
     env:
-      Solution_Name: WinUI3FinalProject.sln
-      Project_Directory: WinUI3FinalProject
+      Solution_Name: CelebrationApp.sln
+      Project_Directory: CelebrationApp
   
     steps:
     - name: Checkout
@@ -97,6 +97,8 @@ jobs:
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
       uses: gittools/actions/gitversion/execute@v0.9.7
+    
+    - name: Echos git version
     - run: |
         echo "Major: ${{ steps.gitversion.outputs.major }}"
         echo "Minor: ${{ steps.gitversion.outputs.minor }}"
@@ -134,13 +136,13 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: WinUI3FinalProject MSIX Packages-${{ steps.gitversion.outputs.fullSemVer }}
-        path: 'SampleDesktopBridge\SampleDesktopBridge (Package)\AppPackages'
+        path: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
         
     - name: Upload server binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.ACCESS_TOKEN }}
-        file: 'SampleDesktopBridge\SampleDesktopBridge (Package)\AppPackages'
-        asset_name: WinUI3FinalProject MSIX Packages
-        tag: "${{ steps.gitversion.outputs.fullSemVer }}"
+        file: 'CelebrationApp\CelebrationApp (Package)\AppPackages'
+        asset_name: CelebrationApp MSIX Packages
+        tag: "Celebration - ${{ steps.gitversion.outputs.semVer }}"
         overwrite: true
