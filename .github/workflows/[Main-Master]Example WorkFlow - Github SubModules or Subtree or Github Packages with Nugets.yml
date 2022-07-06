@@ -93,8 +93,15 @@ jobs:
     name: GitVersion (Generates the version of the repository)
     needs: [job1, job2, job3]
     runs-on: ubuntu-latest
-    steps:
     
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.ACCESS_TOKEN }}
+        submodules: true
+        
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.7
       with:
