@@ -92,7 +92,7 @@ jobs:
   job4:
     name: GitVersion (Generates the version of the repository)
     needs: [job1, job2, job3]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     
     - name: Install GitVersion
