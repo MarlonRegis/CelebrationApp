@@ -101,6 +101,7 @@ jobs:
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
+        fetch-depth: 0
         
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.7
